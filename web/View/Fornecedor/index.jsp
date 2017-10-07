@@ -155,7 +155,7 @@
                                 </table>
                             </form>
                             <br><br>
-                            <a class="btn btn-default" href="clienteform.jsp">Adicionar Fornecedor</a>
+                            <a class="btn btn-default" href="fornecedorform.jsp">Adicionar Fornecedor</a>
                             <br><br>
                             <table class="table table-striped" cellspacing="0" cellpadding="0">
                                 <thead>

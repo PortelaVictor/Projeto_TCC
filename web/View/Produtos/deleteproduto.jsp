@@ -4,14 +4,10 @@
     Author     : porte
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<%@page import="com.javatpoint.dao.ProdutoDao"%>
+<jsp:useBean id="p" class="com.javatpoint.bean.Produto"></jsp:useBean>
+<jsp:setProperty property="*" name="p"/>
+<%
+    ProdutoDao.delete(p);
+    response.sendRedirect("index.jsp");
+%>

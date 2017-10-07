@@ -9,9 +9,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Erro</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        
+        <div class="alert alert-warning" role="alert">Não foi possivel salvar o registro.</div>
+       
+        <jsp:include page="produtoform.jsp"></jsp:include>
     </body>
 </html>

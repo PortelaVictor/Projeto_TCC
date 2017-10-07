@@ -36,17 +36,17 @@
     request.getParameter("perfil");
    
     if (rs.next()) {
-        if(rs.getString("perfil").equals("administrador"))
+        if(rs.getString("perfil").equals("Administrador"))
         {
             session.setAttribute("login", login);
             response.sendRedirect("home_administrador.jsp");
         }
-        if(rs.getString("perfil").equals("comprador"))
+        if(rs.getString("perfil").equals("Comprador"))
         {
             session.setAttribute("login", login);
             response.sendRedirect("home_comprador.jsp");
         }
-        if(rs.getString("perfil").equals("vendedor"))
+        if(rs.getString("perfil").equals("Vendedor"))
         {
             session.setAttribute("login", login);
             response.sendRedirect("home_vendedor.jsp");

@@ -2,6 +2,8 @@
 package com.javatpoint.bean;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -9,8 +11,8 @@ import java.sql.Date;
  */
 public class Cliente {
     private int id, cep, numero;
-    private String nome, cpfcnpj, contato, email,  endereco, complemento, estado, cidade;
-    private Date dnascimento;
+    private String nome, cpfcnpj, contato, email,  endereco, complemento, estado, cidade, dnascimento;
+    //private Date dnascimento;
     
     public int getId(){
         return id;
@@ -78,10 +80,14 @@ public class Cliente {
     public void setCidade(String cidade){
         this.cidade = cidade;
     }
-    public Date getDnascimento(){
+    public String getDnascimento(){
         return dnascimento;
     }
-    public void setDnascimento(Date dnascimento){
-        this.dnascimento = dnascimento;
+    public void setDnascimento(String dnascimento) throws ParseException{
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        //this.dnascimento = dnascimento;
+        java.sql.Date data = new java.sql.Date(format.parse(dnascimento).getTime());
+            
+        
     }
 }

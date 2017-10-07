@@ -5,12 +5,16 @@ package com.javatpoint.dao;
  *
  * @author porte
  */
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Calendar;
 import java.sql.Date;
 import com.javatpoint.bean.Cliente;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 public class ClienteDao {
     public static Connection getConnection(){
         Connection con=null;
@@ -20,15 +24,28 @@ public class ClienteDao {
         }catch(Exception e){System.out.println(e);}
         return con;
     }
+    /*public static Date formataData(String dnascimento) throws Exception{
+        if(dnascimento == null || dnascimento.equals(""))
+            return null;
+        Date date = null;
+        try{
+            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            date = (Date)(java.util.Date)formatter.parse(dnascimento);
+        }catch (ParseException e){
+            throw e;
+        }
+        return date;
+    }*/
     public static int save(Cliente c){
         int status=0;
         try{
+            
             Connection con=getConnection();
             PreparedStatement ps=con.prepareStatement(
             "insert into cliente(nome, cpfcnpj, dnascimento, contato, email, cep, endereco, numero, complemento, estado, cidade) values (?,?,?,?,?,?,?,?,?,?,?)");
             ps.setString(1,c.getNome());
             ps.setString(2,c.getCpfcnpj());
-            ps.setDate(3,c.getDnascimento());
+            ps.setString(3,c.getDnascimento());
             ps.setString(4,c.getContato());
             ps.setString(5,c.getEmail());
             ps.setInt(6,c.getCep());
@@ -49,7 +66,7 @@ public class ClienteDao {
             "update cliente set nome=?, cpfcnpj=?, dnascimento=?, contato=?, email=?, cep=?, endereco=?, numero=?, complemento=?, estado=?, cidade=? where id=?");
             ps.setString(1,c.getNome());
             ps.setString(2,c.getCpfcnpj());
-            ps.setDate(3,c.getDnascimento());
+            ps.setString(3,c.getDnascimento());
             ps.setString(4,c.getContato());
             ps.setString(5,c.getEmail());
             ps.setInt(6,c.getCep());
@@ -84,7 +101,7 @@ public class ClienteDao {
                 c.setId(rs.getInt("id"));
                 c.setNome(rs.getString("nome"));
                 c.setCpfcnpj(rs.getString("cpfcnpj"));
-                c.setDnascimento(rs.getDate("dnascimento"));
+                c.setDnascimento(rs.getString("dnascimento"));
                 c.setContato(rs.getString("contato"));
                 c.setEmail(rs.getString("email"));
                 c.setCep(rs.getInt("cep"));
@@ -110,7 +127,7 @@ public class ClienteDao {
                 c.setId(rs.getInt("id"));
                 c.setNome(rs.getString("nome"));
                 c.setCpfcnpj(rs.getString("cpfcnpj"));
-                c.setDnascimento(rs.getDate("dnascimento"));
+                c.setDnascimento(rs.getString("dnascimento"));
                 c.setContato(rs.getString("contato"));
                 c.setEmail(rs.getString("email"));
                 c.setCep(rs.getInt("cep"));
