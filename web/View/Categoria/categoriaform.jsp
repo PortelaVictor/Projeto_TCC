@@ -125,11 +125,11 @@
                         <div class="table-responsive col-md-12">
                             <form action="addcategoria.jsp" method="post">
                                 <div class="col-md-12">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-3">
                                         <label for="nome"> Nome:</label>
                                         <input type="text" class="form-control" name="nome" required>
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-3">
                                         <label for="descricao">Descricao:</label>
                                         <input type="text" class="form-control" name="descricao" required>
                                     </div>

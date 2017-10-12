@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
-<%@page import="com.javatpoint.dao.ClienteDao,com.javatpoint.bean.Cliente"%>
+<%@page import="com.javatpoint.dao.FornecedorDao,com.javatpoint.bean.Fornecedor"%>
 <%
     if ((session.getAttribute("id") == null) || (session.getAttribute("id") == "" )) {
 %>
@@ -124,37 +124,91 @@
 						<div class="table-responsive col-md-12">
 							<%
 								String id=request.getParameter("id");
-								Cliente c=ClienteDao.getRecordById(Integer.parseInt(id));
+								Fornecedor f=FornecedorDao.getRecordById(Integer.parseInt(id));
 							%>    
 							<form action="editfornecedor.jsp" method="post">
 								<div class="col-md-12">
-									<input type="hidden" name="id" value="<%=c.getId()%>"/>
-									<div class="form-group col-md-6">
-										<label for="nome_completo"> Nome:</label>
-										<input type="text" class="form-control" name="nome" id="nome" value="<%=u.getNome()%>">
-									</div>
-									<div class="form-group col-md-6">
-										<label for="email">Informe e-mail:</label>
-										<input type="email" class="form-control" name="email" id="email" value="<%=u.getEmail()%>">
-									</div>
-									<div class="form-group col-md-4">
-										<label for="email">Informe login:</label>
-										<input type="text" class="form-control" name="login" id="login" value="<%=u.getLogin()%>">
-									</div>
-									<div class="form-group col-md-4">
-										<label for="email">Informe senha:</label>
-										<input type="password" class="form-control" name="senha" id="senha" value="<%=u.getSenha()%>">
-									</div>
-									<div class="form-group col-md-4">
-										<label for="perfil">Informe Perfil:</label>
-										<select class="form-control" id="sel1" name="perfil" id="perfil" >
-											<option><%= u.getPerfil()%></option>
-											<option>Administrador</option>
-											<option>Comprador</option>
-											<option>Vendedor</option>
-										</select>
-									</div>
-								</div>
+                                                                <input type="hidden" name="id" value="<%=f.getId()%>"/>
+                                                                <div class="row">
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="nome"> Nome:</label>
+                                                                        <input type="text" class="form-control" name="nome" value="<%=f.getNome()%>" required>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="cpfcnpj">CPF/CNPJ:</label>
+                                                                        <input type="text" class="form-control" name="cpfcnpj" value="<%=f.getCpfcnpj()%>" required>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="dnascimento">Data Nascimento:</label>
+                                                                        <input type="date" class="form-control" name="dnascimento" value="<%=f.getDnascimento()%>" required >
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="contato">Contato:</label>
+                                                                        <input type="text" class="form-control" name="contato" value="<%=f.getContato()%>" required>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="email">Informe e-mail:</label>
+                                                                        <input type="email" class="form-control" name="email" value="<%=f.getEmail()%>" required>
+                                                                    </div>
+                                                                </div>    
+                                                                <div class="box">
+                                                                    <h4 class="underline">Informações de Endereço</h4>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="cep">CEP:</label>
+                                                                        <input type="text" class="form-control" name="cep" value="<%=f.getCep()%>" required>
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="endereco">Endereço:</label>
+                                                                        <input type="text" class="form-control" name="endereco" value="<%=f.getEndereco()%>" required>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="numero">Numero:</label>
+                                                                        <input type="number" class="form-control" name="numero" value="<%=f.getNumero()%>" required>
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="complemento">Complemento:</label>
+                                                                        <input type="text" class="form-control" name="complemento" value="<%=f.getComplemento()%>" required>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="estado">Estado:</label>
+                                                                        <select class="form-control" id="sel1" name="estado" required>
+                                                                            <option><%= f.getEstado()%></option> 
+                                                                            <option>Acre</option> 
+                                                                            <option>Alagoas</option> 
+                                                                            <option>Amazonas</option> 
+                                                                            <option>Amapá</option> 
+                                                                            <option>Bahia</option> 
+                                                                            <option>Ceará</option> 
+                                                                            <option>Distrito Federal</option> 
+                                                                            <option>Espírito Santo</option> 
+                                                                            <option>Goiás</option> 
+                                                                            <option>Maranhão</option> 
+                                                                            <option>Mato Grosso</option> 
+                                                                            <option>Mato Grosso do Sul</option> 
+                                                                            <option>Minas Gerais</option> 
+                                                                            <option>Pará</option> 
+                                                                            <option>Paraíba</option> 
+                                                                            <option>Paraná</option> 
+                                                                            <option>Pernambuco</option> 
+                                                                            <option>Piauí</option> 
+                                                                            <option>Rio de Janeiro</option> 
+                                                                            <option>Rio Grande do Norte</option> 
+                                                                            <option>Rondônia</option> 
+                                                                            <option>Rio Grande do Sul</option> 
+                                                                            <option>Roraima</option> 
+                                                                            <option>Santa Catarina</option> 
+                                                                            <option>Sergipe</option> 
+                                                                            <option>São Paulo</option> 
+                                                                            <option>Tocantins</option> 
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="cidade">Cidade:</label>
+                                                                        <input type="text" class="form-control" name="cidade" value="<%=f.getCidade()%>" required>
+                                                                    </div>
+                                                                </div>
 								<div class="form-group col-md-12">
 									<div class="col-md-4">
 									   <button id="cancelar" name="cancela" class="btn btn-default" onclick="voltar()">Cancelar</button>

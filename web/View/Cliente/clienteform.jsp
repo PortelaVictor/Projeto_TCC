@@ -148,7 +148,7 @@
                                         </div>
                                     </div>    
                                     <div class="box">
-                                        <h4 class="underline">Informacoes de Endereço</h4>
+                                        <h4 class="underline">Informações de Endereço</h4>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-md-3">

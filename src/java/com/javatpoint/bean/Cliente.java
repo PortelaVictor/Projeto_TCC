@@ -10,8 +10,8 @@ import java.text.SimpleDateFormat;
  * @author porte
  */
 public class Cliente {
-    private int id, cep, numero;
-    private String nome, cpfcnpj, contato, email,  endereco, complemento, estado, cidade, dnascimento;
+    private int id, numero;
+    private String nome, cpfcnpj, contato, email, endereco, complemento, estado, cidade, dnascimento, cep;
     //private Date dnascimento;
     
     public int getId(){
@@ -19,18 +19,6 @@ public class Cliente {
     }
     public void setId(int id){
         this.id = id;
-    }
-     public int getCep(){
-        return cep;
-    }
-    public void setCep(int cep){
-        this.cep = cep;
-    }
-     public int getNumero(){
-        return numero;
-    }
-    public void setNumero(int numero){
-        this.numero = numero;
     }
     public String getNome(){
         return nome;
@@ -44,6 +32,21 @@ public class Cliente {
     public void setCpfcnpj(String cpfcnpj){
         this.cpfcnpj = cpfcnpj;
     }
+    /*public Date getDnascimento(){
+        return dnascimento; 
+    }
+    public void setDnascimento(Date dnascimento){
+        this.dnascimento = dnascimento;
+       
+    }*/
+    public String getDnascimento(){
+        return dnascimento;
+    }
+    public void setDnascimento(String dnascimento) throws ParseException{
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        this.dnascimento = dnascimento;
+        java.sql.Date data = new java.sql.Date(format.parse(dnascimento).getTime());
+    }
     public String getContato(){
         return contato;
     }
@@ -56,11 +59,23 @@ public class Cliente {
     public void setEmail(String email){
         this.email = email;
     }
+    public String getCep(){
+        return cep;
+    }
+    public void setCep(String cep){
+        this.cep = cep;
+    }
     public String getEndereco(){
         return endereco;
     }
     public void setEndereco(String endereco){
         this.endereco = endereco;
+    }
+    public int getNumero(){
+        return numero;
+    }
+    public void setNumero(int numero){
+        this.numero = numero;
     }
     public String getComplemento(){
         return complemento;
@@ -80,14 +95,5 @@ public class Cliente {
     public void setCidade(String cidade){
         this.cidade = cidade;
     }
-    public String getDnascimento(){
-        return dnascimento;
-    }
-    public void setDnascimento(String dnascimento) throws ParseException{
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        //this.dnascimento = dnascimento;
-        java.sql.Date data = new java.sql.Date(format.parse(dnascimento).getTime());
-            
-        
-    }
+    
 }

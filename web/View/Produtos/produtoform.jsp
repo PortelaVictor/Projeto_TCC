@@ -126,13 +126,45 @@
                         <div class="table-responsive col-md-12">
                             <form action="addproduto.jsp" method="post">
                                 <div class="col-md-12">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-3">
                                         <label for="nome"> Nome:</label>
                                         <input type="text" class="form-control" name="nome" required>
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-3">
                                         <label for="descricao">Descricao:</label>
                                         <input type="text" class="form-control" name="descricao" required>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="dvencimento">Data Vencimento:</label>
+                                        <input type="date" class="form-control" name="dvencimento" required >
+                                    </div>
+                                    
+                                    <div class="form-group col-md-2">
+                                        <label for="categoria">Categoria</label>
+                                        <select class="form-control" id="sel1" name="categoria" required>
+                                            <option></option>
+                                            <%  //Query buscando categoria da tabela de categoria
+                                                ResultSet resultset=null;
+                                                try{
+                                                    Class.forName("com.mysql.jdbc.Driver");
+                                                    Connection con=null;
+                                                    con=DriverManager.getConnection("jdbc:mysql://localhost:3306/producao","root","");
+                                                    Statement statement = con.createStatement();
+                                                    resultset =statement.executeQuery("select * from categoria");
+                                                    while(resultset.next()){%>
+                                                <option value="<%= resultset.getString(1)%>"><%= resultset.getString(2)%></option>
+                                            <%}%>
+                                        </select>
+                                        <%
+                                            }catch(Exception e){out.println("Entrada errada"+e);}
+                                        %>
+                                    </div>
+                                    <div class="form-group col-md-1">
+                                        <label for="unidade">Unidade</label>
+                                        <select class="form-control" id="sel1" name="unidade" required>
+                                            <option></option> 
+                                             
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-12">

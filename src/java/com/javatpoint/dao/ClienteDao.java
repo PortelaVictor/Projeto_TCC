@@ -8,12 +8,7 @@ package com.javatpoint.dao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Calendar;
-import java.sql.Date;
 import com.javatpoint.bean.Cliente;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 public class ClienteDao {
     public static Connection getConnection(){
@@ -24,18 +19,7 @@ public class ClienteDao {
         }catch(Exception e){System.out.println(e);}
         return con;
     }
-    /*public static Date formataData(String dnascimento) throws Exception{
-        if(dnascimento == null || dnascimento.equals(""))
-            return null;
-        Date date = null;
-        try{
-            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-            date = (Date)(java.util.Date)formatter.parse(dnascimento);
-        }catch (ParseException e){
-            throw e;
-        }
-        return date;
-    }*/
+    
     public static int save(Cliente c){
         int status=0;
         try{
@@ -46,9 +30,10 @@ public class ClienteDao {
             ps.setString(1,c.getNome());
             ps.setString(2,c.getCpfcnpj());
             ps.setString(3,c.getDnascimento());
+            //ps.setDate(3, new Date(c.getDnascimento().getTime()));
             ps.setString(4,c.getContato());
             ps.setString(5,c.getEmail());
-            ps.setInt(6,c.getCep());
+            ps.setString(6,c.getCep());
             ps.setString(7,c.getEndereco());
             ps.setInt(8,c.getNumero());
             ps.setString(9,c.getComplemento());
@@ -67,9 +52,10 @@ public class ClienteDao {
             ps.setString(1,c.getNome());
             ps.setString(2,c.getCpfcnpj());
             ps.setString(3,c.getDnascimento());
+            //ps.setDate(3, new Date(c.getDnascimento().getTime()));
             ps.setString(4,c.getContato());
             ps.setString(5,c.getEmail());
-            ps.setInt(6,c.getCep());
+            ps.setString(6,c.getCep());
             ps.setString(7,c.getEndereco());
             ps.setInt(8,c.getNumero());
             ps.setString(9,c.getComplemento());
@@ -102,9 +88,10 @@ public class ClienteDao {
                 c.setNome(rs.getString("nome"));
                 c.setCpfcnpj(rs.getString("cpfcnpj"));
                 c.setDnascimento(rs.getString("dnascimento"));
+                //c.setDnascimento(rs.getDnascimento("dnascimento"));
                 c.setContato(rs.getString("contato"));
                 c.setEmail(rs.getString("email"));
-                c.setCep(rs.getInt("cep"));
+                c.setCep(rs.getString("cep"));
                 c.setEndereco(rs.getString("endereco"));
                 c.setNumero(rs.getInt("numero"));
                 c.setComplemento(rs.getString("complemento"));
@@ -130,7 +117,7 @@ public class ClienteDao {
                 c.setDnascimento(rs.getString("dnascimento"));
                 c.setContato(rs.getString("contato"));
                 c.setEmail(rs.getString("email"));
-                c.setCep(rs.getInt("cep"));
+                c.setCep(rs.getString("cep"));
                 c.setEndereco(rs.getString("endereco"));
                 c.setNumero(rs.getInt("numero"));
                 c.setComplemento(rs.getString("complemento"));

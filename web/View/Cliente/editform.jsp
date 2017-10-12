@@ -126,54 +126,55 @@
 								String id=request.getParameter("id");
 								Cliente c=ClienteDao.getRecordById(Integer.parseInt(id));
 							%>    
-							<form action="editusuario.jsp" method="post">
+							<form action="editcliente.jsp" method="post">
                                                             <div class="col-md-12">
+                                                                <input type="hidden" name="id" value="<%=c.getId()%>"/>
                                                                 <div class="row">
                                                                     <div class="form-group col-md-6">
                                                                         <label for="nome"> Nome:</label>
-                                                                        <input type="text" class="form-control" name="nome" required>
+                                                                        <input type="text" class="form-control" name="nome" value="<%=c.getNome()%>" required>
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="cpfcnpj">CPF/CNPJ:</label>
-                                                                        <input type="text" class="form-control" name="cpfcnpj" required>
+                                                                        <input type="text" class="form-control" name="cpfcnpj" value="<%=c.getCpfcnpj()%>" required>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="dnascimento">Data Nascimento:</label>
+                                                                        <input type="date" class="form-control" name="dnascimento" value="<%=c.getDnascimento()%>" required >
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="contato">Contato:</label>
-                                                                        <input type="text" class="form-control" name="contato" required>
-                                                                    </div>
-                                                                    <div class="form-group col-md-3">
-                                                                        <label for="dnasmcimento">Data Nascimento:</label>
-                                                                        <input type="date" class="form-control" name="dnasmcimento" required>
+                                                                        <input type="text" class="form-control" name="contato" value="<%=c.getContato()%>" required>
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="email">Informe e-mail:</label>
-                                                                        <input type="email" class="form-control" name="email" required>
+                                                                        <input type="email" class="form-control" name="email" value="<%=c.getEmail()%>" required>
                                                                     </div>
                                                                 </div>    
                                                                 <div class="box">
-                                                                    <h4 class="underline">Informacoes de Endereço</h4>
+                                                                    <h4 class="underline">Informações de Endereço</h4>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="form-group col-md-3">
                                                                         <label for="cep">CEP:</label>
-                                                                        <input type="text" class="form-control" name="cep" required>
+                                                                        <input type="text" class="form-control" name="cep" value="<%=c.getCep()%>" required>
                                                                     </div>
                                                                     <div class="form-group col-md-6">
                                                                         <label for="endereco">Endereço:</label>
-                                                                        <input type="text" class="form-control" name="endereco" required>
+                                                                        <input type="text" class="form-control" name="endereco" value="<%=c.getEndereco()%>" required>
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="numero">Numero:</label>
-                                                                        <input type="number" class="form-control" name="numero" required>
+                                                                        <input type="number" class="form-control" name="numero" value="<%=c.getNumero()%>" required>
                                                                     </div>
                                                                     <div class="form-group col-md-6">
                                                                         <label for="complemento">Complemento:</label>
-                                                                        <input type="text" class="form-control" name="complemento" required>
+                                                                        <input type="text" class="form-control" name="complemento" value="<%=c.getComplemento()%>" required>
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="estado">Estado:</label>
                                                                         <select class="form-control" id="sel1" name="estado" required>
-                                                                            <option></option> 
+                                                                            <option><%= c.getEstado()%></option> 
                                                                             <option>Acre</option> 
                                                                             <option>Alagoas</option> 
                                                                             <option>Amazonas</option> 
@@ -205,10 +206,10 @@
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="cidade">Cidade:</label>
-                                                                        <input type="text" class="form-control" name="cidade" required>
+                                                                        <input type="text" class="form-control" name="cidade" value="<%=c.getCidade()%>" required>
                                                                     </div>
-                                                                </div>    
-                                                            </div>
+                                                                </div>
+                                                            </div>        
                                                             <div class="row">
                                                                 <div class="form-group col-md-12">
                                                                     <div class="col-md-4">

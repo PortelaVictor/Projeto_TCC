@@ -1,6 +1,5 @@
 
 package com.javatpoint.dao;
-
 /**
  *
  * @author porte
@@ -8,7 +7,6 @@ package com.javatpoint.dao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Date;
 import com.javatpoint.bean.Fornecedor;
 
 public class FornecedorDao {
@@ -20,18 +18,21 @@ public class FornecedorDao {
         }catch(Exception e){System.out.println(e);}
         return con;
     }
+    
     public static int save(Fornecedor f){
         int status=0;
         try{
+            
             Connection con=getConnection();
             PreparedStatement ps=con.prepareStatement(
-            "insert into forncedor(nome, cpfcnpj, dnascimento, contato, email, cep, endereco, numero, complemento, estado, cidade) values (?,?,?,?,?,?,?,?,?,?,?)");
+            "insert into fornecedor(nome, cpfcnpj, dnascimento, contato, email, cep, endereco, numero, complemento, estado, cidade) values (?,?,?,?,?,?,?,?,?,?,?)");
             ps.setString(1,f.getNome());
             ps.setString(2,f.getCpfcnpj());
-            ps.setDate(3,f.getDnascimento());
+            ps.setString(3,f.getDnascimento());
+            //ps.setDate(3, new Date(c.getDnascimento().getTime()));
             ps.setString(4,f.getContato());
             ps.setString(5,f.getEmail());
-            ps.setInt(6,f.getCep());
+            ps.setString(6,f.getCep());
             ps.setString(7,f.getEndereco());
             ps.setInt(8,f.getNumero());
             ps.setString(9,f.getComplemento());
@@ -49,10 +50,11 @@ public class FornecedorDao {
             "update fornecedor set nome=?, cpfcnpj=?, dnascimento=?, contato=?, email=?, cep=?, endereco=?, numero=?, complemento=?, estado=?, cidade=? where id=?");
             ps.setString(1,f.getNome());
             ps.setString(2,f.getCpfcnpj());
-            ps.setDate(3,f.getDnascimento());
+            ps.setString(3,f.getDnascimento());
+            //ps.setDate(3, new Date(c.getDnascimento().getTime()));
             ps.setString(4,f.getContato());
             ps.setString(5,f.getEmail());
-            ps.setInt(6,f.getCep());
+            ps.setString(6,f.getCep());
             ps.setString(7,f.getEndereco());
             ps.setInt(8,f.getNumero());
             ps.setString(9,f.getComplemento());
@@ -84,10 +86,11 @@ public class FornecedorDao {
                 f.setId(rs.getInt("id"));
                 f.setNome(rs.getString("nome"));
                 f.setCpfcnpj(rs.getString("cpfcnpj"));
-                f.setDnascimento(rs.getDate("dnascimento"));
+                f.setDnascimento(rs.getString("dnascimento"));
+                //c.setDnascimento(rs.getDnascimento("dnascimento"));
                 f.setContato(rs.getString("contato"));
                 f.setEmail(rs.getString("email"));
-                f.setCep(rs.getInt("cep"));
+                f.setCep(rs.getString("cep"));
                 f.setEndereco(rs.getString("endereco"));
                 f.setNumero(rs.getInt("numero"));
                 f.setComplemento(rs.getString("complemento"));
@@ -110,10 +113,10 @@ public class FornecedorDao {
                 f.setId(rs.getInt("id"));
                 f.setNome(rs.getString("nome"));
                 f.setCpfcnpj(rs.getString("cpfcnpj"));
-                f.setDnascimento(rs.getDate("dnascimento"));
+                f.setDnascimento(rs.getString("dnascimento"));
                 f.setContato(rs.getString("contato"));
                 f.setEmail(rs.getString("email"));
-                f.setCep(rs.getInt("cep"));
+                f.setCep(rs.getString("cep"));
                 f.setEndereco(rs.getString("endereco"));
                 f.setNumero(rs.getInt("numero"));
                 f.setComplemento(rs.getString("complemento"));

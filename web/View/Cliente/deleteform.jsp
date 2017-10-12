@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
-<%@page import="com.javatpoint.dao.UsuarioDao,com.javatpoint.bean.Usuario"%>
+<%@page import="com.javatpoint.dao.ClienteDao,com.javatpoint.bean.Cliente"%>
 <%
     if ((session.getAttribute("id") == null) || (session.getAttribute("id") == "" )) {
 %>
@@ -123,57 +123,58 @@
 					<div id="list" class="row">
 						<div class="table-responsive col-md-12">
 							<%
-								String id=request.getParameter("id");
-								Usuario u=UsuarioDao.getRecordById(Integer.parseInt(id));
-							%>    
+                                                            String id=request.getParameter("id");
+                                                            Cliente c=ClienteDao.getRecordById(Integer.parseInt(id));
+							%>     
 							<form action="deletecliente.jsp" method="post">
                                                             <div class="col-md-12">
+                                                                <input type="hidden" name="id" value="<%=c.getId()%>"/>
                                                                 <div class="row">
                                                                     <div class="form-group col-md-6">
                                                                         <label for="nome"> Nome:</label>
-                                                                        <input type="text" class="form-control" name="nome" required>
+                                                                        <input type="text" class="form-control" name="nome" value="<%=c.getNome()%>" disabled="disabled">
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="cpfcnpj">CPF/CNPJ:</label>
-                                                                        <input type="text" class="form-control" name="cpfcnpj" required>
+                                                                        <input type="text" class="form-control" name="cpfcnpj" value="<%=c.getCpfcnpj()%>" disabled="disabled">
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="dnascimento">Data Nascimento:</label>
+                                                                        <input type="date" class="form-control" name="dnascimento" value="<%=c.getDnascimento()%>" disabled="disabled">
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="contato">Contato:</label>
-                                                                        <input type="text" class="form-control" name="contato" required>
-                                                                    </div>
-                                                                    <div class="form-group col-md-3">
-                                                                        <label for="dnasmcimento">Data Nascimento:</label>
-                                                                        <input type="date" class="form-control" name="dnasmcimento" required>
+                                                                        <input type="text" class="form-control" name="contato" value="<%=c.getContato()%>" disabled="disabled">
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="email">Informe e-mail:</label>
-                                                                        <input type="email" class="form-control" name="email" required>
+                                                                        <input type="email" class="form-control" name="email" value="<%=c.getEmail()%>" disabled="disabled">
                                                                     </div>
                                                                 </div>    
                                                                 <div class="box">
-                                                                    <h4 class="underline">Informacoes de Endereço</h4>
+                                                                    <h4 class="underline">Informações de Endereço</h4>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="form-group col-md-3">
                                                                         <label for="cep">CEP:</label>
-                                                                        <input type="text" class="form-control" name="cep" required>
+                                                                        <input type="text" class="form-control" name="cep" value="<%=c.getCep()%>" disabled="disabled">
                                                                     </div>
                                                                     <div class="form-group col-md-6">
                                                                         <label for="endereco">Endereço:</label>
-                                                                        <input type="text" class="form-control" name="endereco" required>
+                                                                        <input type="text" class="form-control" name="endereco" value="<%=c.getEndereco()%>" disabled="disabled">
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="numero">Numero:</label>
-                                                                        <input type="number" class="form-control" name="numero" required>
+                                                                        <input type="number" class="form-control" name="numero" value="<%=c.getNumero()%>" disabled="disabled">
                                                                     </div>
                                                                     <div class="form-group col-md-6">
                                                                         <label for="complemento">Complemento:</label>
-                                                                        <input type="text" class="form-control" name="complemento" required>
+                                                                        <input type="text" class="form-control" name="complemento" value="<%=c.getComplemento()%>" disabled="disabled">
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="estado">Estado:</label>
-                                                                        <select class="form-control" id="sel1" name="estado" required>
-                                                                            <option></option> 
+                                                                        <select class="form-control" id="sel1" name="estado" disabled="disabled">
+                                                                            <option><%= c.getEstado()%></option> 
                                                                             <option>Acre</option> 
                                                                             <option>Alagoas</option> 
                                                                             <option>Amazonas</option> 
@@ -205,17 +206,17 @@
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="cidade">Cidade:</label>
-                                                                        <input type="text" class="form-control" name="cidade" required>
-                                                                    </div>
-                                                                </div>    
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-12">
-                                                                    <div class="col-md-4">
-                                                                      <button id="cancelar" name="cancela" class="btn btn-default" onclick="voltar()">Cancelar</button>
-                                                                      <button id="incluir" name="incluir" class="btn btn-primary">Salvar</button>
+                                                                        <input type="text" class="form-control" name="cidade" value="<%=c.getCidade()%>" disabled="disabled">
                                                                     </div>
                                                                 </div>
+                                                            </div>        
+                                                            <div class="row">
+                                                                <div class="form-group col-md-12">
+									<div class="col-md-4">
+										<button id="cancelar" name="cancela" class="btn btn-default" onclick="voltar()">Cancelar</button>
+										<button id="delete" name="delete" class="btn btn-danger">Deletar</button>
+									</div>
+								</div> 
                                                             </div>    
                                                         </form>
 						</div>
