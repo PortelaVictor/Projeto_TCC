@@ -1,6 +1,6 @@
 <%-- 
-    Document   : addproduto
-    Created on : 26/09/2017, 21:34:27
+    Document   : addcliente
+    Created on : 24/09/2017, 16:13:32
     Author     : porte
 --%>
 
@@ -11,7 +11,7 @@
 <%  
     int i=ProdutoDao.save(p);  
     if(i>0){  
-        response.sendRedirect("addproduto-sucesso.jsp");  
+        response.sendRedirect("addproduto-successo.jsp");  
     }else{  
         response.sendRedirect("addproduto-erro.jsp");  
     }  

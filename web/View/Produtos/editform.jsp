@@ -1,12 +1,11 @@
 <%-- 
     Document   : editform
-    Created on : 26/09/2017, 21:35:10
+    Created on : 17/09/2017, 15:09:34
     Author     : porte
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
-<%@page import="com.javatpoint.dao.ProdutoDao,com.javatpoint.bean.Produto"%>
+<%@page import="com.javatpoint.dao.UsuarioDao,com.javatpoint.bean.Usuario"%>
 <%
     if ((session.getAttribute("id") == null) || (session.getAttribute("id") == "" )) {
 %>
@@ -22,7 +21,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Deletar Produto</title>
+        <title>Editar Usuário</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!-- Bootstrap Core CSS Importante menu lateral-->
         <link href="../../Model/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -44,6 +43,7 @@
     </head>
     
 	<body>
+
 		<div id="wrapper">
 			<!-- Navigation -->
 			<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -111,46 +111,62 @@
 				</div>
 				<!-- /.navbar-static-side -->
 			</nav>
+		</div>	
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header"> Editar Usuário</h1>
+				</div>
+				<!-- /.col-lg-12 -->
+				<div class="col-lg-12">
+					<div id="list" class="row">
+						<div class="table-responsive col-md-12">
+							<%
+								String id=request.getParameter("id");
+								Usuario u=UsuarioDao.getRecordById(Integer.parseInt(id));
+							%>    
+							<form action="editusuario.jsp" method="post">
+								<div class="col-md-12">
+									<input type="hidden" name="id" value="<%=u.getId()%>"/>
+									<div class="form-group col-md-6">
+										<label for="nome_completo"> Digite nome completo:</label>
+										<input type="text" class="form-control" name="nome" id="nome" value="<%=u.getNome()%>">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="email">Informe e-mail:</label>
+										<input type="email" class="form-control" name="email" id="email" value="<%=u.getEmail()%>">
+									</div>
+									<div class="form-group col-md-4">
+										<label for="email">Informe login:</label>
+										<input type="text" class="form-control" name="login" id="login" value="<%=u.getLogin()%>">
+									</div>
+									<div class="form-group col-md-4">
+										<label for="email">Informe senha:</label>
+										<input type="password" class="form-control" name="senha" id="senha" value="<%=u.getSenha()%>">
+									</div>
+									<div class="form-group col-md-4">
+										<label for="perfil">Informe Perfil:</label>
+										<select class="form-control" id="sel1" name="perfil" id="perfil" >
+											<option><%= u.getPerfil()%></option>
+											<option>Administrador</option>
+											<option>Comprador</option>
+											<option>Vendedor</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group col-md-12">
+									<div class="col-md-4">
+									   <button id="cancelar" name="cancela" class="btn btn-default" onclick="voltar()">Cancelar</button>
+									   <button id="Editar" name="Editar" class="btn btn-warning" value="Editar">Editar</button>
+									</div>
+								</div>    
+							</form>
+						</div>
+					</div> <!-- /#list -->
+				</div>
+			</div>
+			<!-- /.row -->
 		</div>
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header"> Deletar Produto</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-                <div class="col-lg-12">
-                    <div id="list" class="row">
-                        <div class="table-responsive col-md-12">
-                            <%
-                                String id=request.getParameter("id");
-                                Produto p=ProdutoDao.getRecordById(Integer.parseInt(id));
-                            %>    
-                            <form action="editproduto.jsp" method="post">
-                                <div class="col-md-12">
-                                    <input type="hidden" name="id" value="<%=p.getId()%>"/>
-                                    <div class="form-group col-md-6">
-                                        <label for="nome_completo"> Nome:</label>
-                                        <input type="text" class="form-control" name="nome" id="nome" value="<%=p.getNome()%>">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="email">Descrição:</label>
-                                        <input type="text" class="form-control" name="descricao" id="email" value="<%=p.getDescricao()%>">
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <div class="col-md-4">
-                                        <button id="cancelar" name="cancela" class="btn btn-default" onclick="voltar()">Cancelar</button>
-                                        <button id="Editar" name="Editar" class="btn btn-warning" value="Editar">Editar</button>
-                                    </div>
-                                </div>    
-                            </form>
-                        </div>
-                    </div> <!-- /#list -->
-                </div>
-            </div>
-            <!-- /.row -->
-        <!-- /#wrapper -->
-        </div>
 		<!-- /#wrapper -->
 		<script type="text/javascript">
 			function voltar()
@@ -158,7 +174,6 @@
 				location.href=" index.jsp"
 			}
 		</script>
-   
 		<!-- jQuery  deixa o menu lateral aberto-->
 		<script src="../../Model/vendor/jquery/jquery.min.js"></script>
 
@@ -174,5 +189,3 @@
 	</body>
     
 </html>
-
-

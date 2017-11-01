@@ -1,6 +1,6 @@
 <%-- 
-    Document   : addproduto-sucesso
-    Created on : 26/09/2017, 21:34:14
+    Document   : addcliente-sucesso
+    Created on : 24/09/2017, 16:12:57
     Author     : porte
 --%>
 
@@ -20,4 +20,3 @@
        
     </body>
 </html>
-

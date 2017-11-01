@@ -25,7 +25,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Produtos</title>
+        <title>Compras</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!-- Bootstrap Core CSS Importante menu lateral-->
         <link href="../../Model/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -117,7 +117,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Produtos</h1>
+                    <h1 class="page-header">Compras</h1>
                 </div>
                 <!-- /.col-lg-12 -->
                 <div class="col-lg-12">
@@ -138,8 +138,8 @@
                                     Class.forName("com.mysql.jdbc.Driver");
                                     connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/producao","root","");
                                     s = connect.createStatement();
-                                    String sql = "SELECT * FROM produto WHERE nome like '%" + pesquisa + "%' " +
-                                        "ORDER BY nome ASC ";
+                                    String sql = "SELECT * FROM compras WHERE id like '%" + pesquisa + "%' " +
+                                        "ORDER BY id ASC ";
                                     System.out.println(sql);
                                     ResultSet rec = s.executeQuery(sql);
 
@@ -155,12 +155,12 @@
                                 </table>
                             </form>
                             <br><br>
-                            <a class="btn btn-default" href="produtoform.jsp">Adicionar Produto</a>
+                            <a class="btn btn-default" href="compraform.jsp">Adicionar Compra</a>
                             <br><br>
                             <table class="table table-striped" cellspacing="0" cellpadding="0">
                                 <thead>
                                     <tr>
-                                        <th>Produto<th>
+                                        <th>Número da Compra<th>
                                         <th class="actions">Ações</th>
                                      </tr>
                                 </thead>
@@ -168,7 +168,7 @@
                                 <tbody>
 
                                     <tr>
-                                        <td><%=rec.getString("nome")%></td>
+                                        <td><%=rec.getString("id")%></td>
                                         <td></td>
                                        <td class="actions">
                                             

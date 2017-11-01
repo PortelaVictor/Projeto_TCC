@@ -1,18 +1,18 @@
 <%-- 
-    Document   : addcliente
-    Created on : 24/09/2017, 16:13:32
+    Document   : addusuario
+    Created on : 17/09/2017, 14:24:19
     Author     : porte
 --%>
 
 <%@page import="com.javatpoint.dao.ClienteDao"%>  
 <jsp:useBean id="c" class="com.javatpoint.bean.Cliente"></jsp:useBean>  
 <jsp:setProperty property="*" name="c"/>  
-
+  
 <%  
     int i=ClienteDao.save(c);  
     if(i>0){  
-        response.sendRedirect("addcliente-sucesso.jsp");  
+        response.sendRedirect("clienteform-sucesso.jsp");  
     }else{  
-        response.sendRedirect("addcliente-erro.jsp");  
+        response.sendRedirect("clienteform-erro.jsp");  
     }  
 %>

@@ -1,9 +1,8 @@
 <%-- 
     Document   : produtoform
-    Created on : 26/09/2017, 21:35:44
+    Created on : 16/09/2017, 20:45:24
     Author     : porte
 --%>
-
 
 <%
     if ((session.getAttribute("id") == null) || (session.getAttribute("id") == "" )) {
@@ -47,7 +46,7 @@
         <link href="../../Model/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-		<div id="wrapper">
+    	<div id="wrapper">
 			<!-- Navigation -->
 			<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
 				<div class="navbar-header">
@@ -127,43 +126,46 @@
                             <form action="addproduto.jsp" method="post">
                                 <div class="col-md-12">
                                     <div class="form-group col-md-3">
-                                        <label for="nome"> Nome:</label>
+                                        <label for="nome_completo"> Nome:</label>
                                         <input type="text" class="form-control" name="nome" required>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label for="descricao">Descricao:</label>
+                                        <label for="descricao"> Descrição</label>
                                         <input type="text" class="form-control" name="descricao" required>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label for="dvencimento">Data Vencimento:</label>
-                                        <input type="date" class="form-control" name="dvencimento" required >
+                                        <label for="dvencimento">Vencimento:</label>
+                                        <input type="date" class="form-control" name="dvencimento" >
                                     </div>
-                                    
-                                    <div class="form-group col-md-2">
+                                    <%  
+                                        //Query buscando categoria
+                                        ResultSet resultset=null;
+                                        try{
+                                            Class.forName("com.mysql.jdbc.Driver");
+                                            Connection con=null;
+                                            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/producao","root","");
+                                            Statement statement = con.createStatement();
+                                            resultset =statement.executeQuery("select * from categoria");
+                                    %>
+                                    <div class="form-group col-md-4">
                                         <label for="categoria">Categoria</label>
-                                        <select class="form-control" id="sel1" name="categoria" required>
+                                        <select class="form-control" id="sel1" name="categoria">
                                             <option></option>
-                                            <%  //Query buscando categoria da tabela de categoria
-                                                ResultSet resultset=null;
-                                                try{
-                                                    Class.forName("com.mysql.jdbc.Driver");
-                                                    Connection con=null;
-                                                    con=DriverManager.getConnection("jdbc:mysql://localhost:3306/producao","root","");
-                                                    Statement statement = con.createStatement();
-                                                    resultset =statement.executeQuery("select * from categoria");
-                                                    while(resultset.next()){%>
-                                                <option value="<%= resultset.getString(1)%>"><%= resultset.getString(2)%></option>
+                                            <%while(resultset.next()){%>
+                                            <option value=<%= resultset.getString(1)%>><%= resultset.getString(2)%></option>
                                             <%}%>
                                         </select>
                                         <%
                                             }catch(Exception e){out.println("Entrada errada"+e);}
                                         %>
                                     </div>
-                                    <div class="form-group col-md-1">
-                                        <label for="unidade">Unidade</label>
-                                        <select class="form-control" id="sel1" name="unidade" required>
-                                            <option></option> 
-                                             
+                                    <div class="form-group col-md-4">
+                                        <label for="unidade">Unidade:</label>
+                                        <select class="form-control" id="sel1" name="unidade">
+                                            <option></option>
+                                            <option>Caixa</option>
+                                            <option>Lt</option>
+                                            <option>m</option>
                                         </select>
                                     </div>
                                 </div>
@@ -180,24 +182,23 @@
             </div>
             <!-- /.row -->
 		</div>
-		<!-- /#wrapper -->
-		<script type="text/javascript">
-			function voltar()
-			{
-				location.href=" index.jsp"
-			}
-		</script>
-		<!-- jQuery  deixa o menu lateral aberto-->
-		<script src="../../Model/vendor/jquery/jquery.min.js"></script>
+	</body>	
+    <!-- /#wrapper -->
+    <script type="text/javascript">
+        function voltar()
+        {
+            location.href=" index.jsp"
+        }
+    </script>
+    <!-- jQuery  deixa o menu lateral aberto-->
+    <script src="../../Model/vendor/jquery/jquery.min.js"></script>
 
-		<!-- Bootstrap Core JavaScript abir o menu lateral-->
-		<script src="../../Model/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Core JavaScript abir o menu lateral-->
+    <script src="../../Model/vendor/bootstrap/js/bootstrap.min.js"></script>
 
-		<!-- Metis Menu Plugin JavaScript -->
-		<script src="../../Model/vendor/metisMenu/metisMenu.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../../Model/vendor/metisMenu/metisMenu.min.js"></script>
 
-		<!-- Custom Theme JavaScript -->
-		<script src="../../Model/dist/js/sb-admin-2.js"></script>
-	</body>
-
+    <!-- Custom Theme JavaScript -->
+    <script src="../../Model/dist/js/sb-admin-2.js"></script>
 </html>
