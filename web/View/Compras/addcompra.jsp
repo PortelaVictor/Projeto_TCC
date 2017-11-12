@@ -7,10 +7,14 @@
 <%@page import="com.javatpoint.dao.CompraDao"%>  
 <jsp:useBean id="c" class="com.javatpoint.bean.Compra"></jsp:useBean>  
 <jsp:setProperty property="*" name="c"/>  
-  
-<%  
-    int i=CompraDao.save(c);  
-    if(i>0){  
+
+<%
+    
+    String[] values = request.getParameterValues("items");   
+    
+ 
+    int i=CompraDao.save(c,values);     
+    if(i>0){   
         response.sendRedirect("addcompra-sucesso.jsp");  
     }else{  
         response.sendRedirect("addcompra-erro.jsp");  

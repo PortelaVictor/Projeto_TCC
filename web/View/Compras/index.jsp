@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
-    Created on : 16/09/2017, 20:01:13
-    Author     : porte
+    Created on : 30/10/2017, 22:33:22
+    Author     : Victor
 --%>
 
 <%
@@ -117,7 +117,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Compras</h1>
+                    <h1 class="page-header">Compra</h1>
                 </div>
                 <!-- /.col-lg-12 -->
                 <div class="col-lg-12">
@@ -138,7 +138,7 @@
                                     Class.forName("com.mysql.jdbc.Driver");
                                     connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/producao","root","");
                                     s = connect.createStatement();
-                                    String sql = "SELECT * FROM compras WHERE id like '%" + pesquisa + "%' " +
+                                    String sql = "SELECT * FROM compra WHERE id like '%" + pesquisa + "%' " +
                                         "ORDER BY id ASC ";
                                     System.out.println(sql);
                                     ResultSet rec = s.executeQuery(sql);
@@ -160,7 +160,7 @@
                             <table class="table table-striped" cellspacing="0" cellpadding="0">
                                 <thead>
                                     <tr>
-                                        <th>Número da Compra<th>
+                                        <th>Compra<th>
                                         <th class="actions">Ações</th>
                                      </tr>
                                 </thead>
@@ -168,7 +168,7 @@
                                 <tbody>
 
                                     <tr>
-                                        <td><%=rec.getString("id")%></td>
+                                        <td><%=rec.getString("nome")%></td>
                                         <td></td>
                                        <td class="actions">
                                             

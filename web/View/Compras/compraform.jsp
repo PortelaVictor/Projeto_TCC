@@ -1,5 +1,5 @@
 <%-- 
-    Document   : usuarioform
+    Document   : produtoform
     Created on : 16/09/2017, 20:45:24
     Author     : porte
 --%>
@@ -11,10 +11,12 @@
 
 <%} else {
 %>
-    Welcome <%=session.getAttribute("id")%>
+    Welcome <%
+	session.getAttribute("id");
+%>
 <a href='logout.jsp'>Sair</a>
 <%
-    }
+   }
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.ResultSet" %>
@@ -25,7 +27,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Adicionar Usuário</title>
+        <title>Adicionar compra</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!-- Bootstrap Core CSS Importante menu lateral-->
         <link href="../../Model/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -84,7 +86,7 @@
 										 <a href="Cliente/index.jsp">Cliente</a>
 									</li>
 									<li>    
-										 <a href="Fornecedor/index.jsp">Fornecedor</a>
+										 <a href="compra/index.jsp">compra</a>
 									</li>
 									<li>    
 									   <a href="Produtos/index.jsp">Produtos</a>
@@ -117,19 +119,17 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header"> Cadastro Compras</h1>
+                    <h1 class="page-header"> Cadastro compra</h1>
                 </div>
                 <!-- /.col-lg-12 -->
                 <div class="col-lg-12">
                     <div id="list" class="row">
                         <div class="table-responsive col-md-12">
                             <form action="addcompra.jsp" method="post">
-                                <div class="col-md-12">
-                                    <div class="box">
-                                        <h4 class="underline">Informações Compra</h4>
-                                    </div>
+                                <div class="col-md-12"> 
+
                                     <%  
-                                        //Query buscando categoria
+                                        //Query buscando Fornecedor
                                         ResultSet resultset=null;
                                         try{
                                             Class.forName("com.mysql.jdbc.Driver");
@@ -139,8 +139,8 @@
                                             resultset =statement.executeQuery("select * from fornecedor");
                                     %>
                                     <div class="form-group col-md-4">
-                                        <label for="CODIGOFORNECEDOR">Fornecedor</label>
-                                        <select class="form-control" id="sel1" name="CODIGOFORNECEDOR">
+                                        <label for="fornecedor">Fornecedor</label>
+                                        <select class="form-control" id="sel1" name="fornecedor">
                                             <option></option>
                                             <%while(resultset.next()){%>
                                             <option value=<%= resultset.getString(1)%>><%= resultset.getString(2)%></option>
@@ -150,22 +150,41 @@
                                             }catch(Exception e){out.println("Entrada errada"+e);}
                                         %>
                                     </div>
-                                    <br><br><br>
-                                    
-                                    <br>
-                                    
-                                    <table id="products-table">		
-                                        <tbody>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="box">
+                                        <h4 class="underline">Informações Item Compra</h4>
+                                    </div>
+                                    <div class="box">
+                                        <button type="button" class="btn btn-default" onclick="javascript:{AddTableRow();}" >Adicionar Produto</button><br><br>
+                                    </div>
+                                    <table id="products-table">	
+                                        <thead>
                                             <tr>
-                                                <th><label for="CODIGOFORNECEDOR">Produto</label></th>
-                                                <th><label for="CODIGOFORNECEDOR">Quantidade</label></th>
-                                                <th><label for="CODIGOFORNECEDOR">Preço</label></th>	
-                                                <th>Ações</th>	
-                                            </tr>		
+
+                                            </tr>   
+                                        </thead>
+                                        <tbody>	
+                                            
+
+                                            
+                                            
+                                            <tr>	
+                                                <th><label for="codigo">Número Linha:</label></th>
+                                                <th><label for="produto">Produto:</label></th>	
+                                                <th><label for="quantidade">Quantidade</label></th>
+                                                <th><label for="preco">Preço</label></th>
+                                                <th><label for="totalproduto">Total Produto</label></th>
+                                                <th><label for="acao">Ações</label></th>		
+                                            </tr>
+                                            
+                                            
+                                            <c:forEach items="${items}" var="items">                                          
                                             <tr>
+                                                <td><input type="text" value="1" class="form-control"  id="codigo" name="codigo" disabled="disabled"></td>
                                                 <td>
                                                     <%  
-                                                        //Query buscando categoria
+                                                        //Query buscando produtos
                                                         //ResultSet resultset=null;
                                                         try{
                                                             Class.forName("com.mysql.jdbc.Driver");
@@ -174,48 +193,38 @@
                                                             Statement statement = con.createStatement();
                                                             resultset =statement.executeQuery("select * from produto");
                                                     %>
-                                                    
-                                                        
-                                                        <select class="form-control" id="sel1" name="CODIGOFORNECEDOR">
-                                                            <option></option>
-                                                            <%while(resultset.next()){%>
-                                                            <option value=<%= resultset.getString(1)%>><%= resultset.getString(2)%></option>
-                                                            <%}%>
-                                                        </select>
-                                                        <%
-                                                            }catch(Exception e){out.println("Entrada errada"+e);}
-                                                        %>
-                                                  
-                                                </td>	
-                                                <td>
-                                                   
-                                                        <input type="text" class="form-control" name="nome" >
-                                                   
-                                                </td>	
-                                                <td>
-                                                    
-                                                        <input type="text" class="form-control" name="nome" >
-                                                   
-                                                </td>	
-                                                <td>	
-                                                    <button onclick="RemoveTableRow(this)" class="btn btn-danger">Remover</button>
-                                                    
-                                                </td>	
-                                            </tr>
-                                        </tbody>
-                                        <tfoot>	
-                                            <tr>
-                                                <td colspan="5" style="text-align: left;">
-                                                    
-                                                    <button onclick="AddTableRow()" id="btnAdicionar" name="addproduto" class="btn btn-default" onclick="voltar()">Adicionar Produto</button>
+                                                    <select class="form-control" id="sel1" name="items">
+                                                        <option></option>
+                                                        <%while(resultset.next()){%>
+                                                        <option value=<%= resultset.getString(1)%>><%= resultset.getString(2)%></option>
+                                                        <%}%>
+                                                    </select>
+                                                    <%
+                                                        }catch(Exception e){out.println("Entrada errada"+e);}
+                                                    %>
+
                                                 </td>
+                                                <td><input type="number" class="form-control" name="items" ></td>
+                                                <td><input type='number' step='any' class="form-control" name="items" ></td>
+                                                <td><input type='number' step='any' class="form-control" name="items" ></td>
+                                                <!--<td>		 
+                                                    <button onclick="RemoveTableRow(this)"  class="btn btn-danger">Remover</button>
+                                                </td>-->	
                                             </tr>	
+                                            
+                                            </c:forEach>
+                                            
+                                        </tbody>
+                                        <br>
+                                        <tfoot>
+
                                         </tfoot>	
                                     </table>
-                                </div>
+                                </div> 
+                                <br><br>                    
                                 <div class="form-group col-md-12">
                                     <div class="col-md-4">
-                                      <button id="cancelar" name="cancela" class="btn btn-default" onclick="voltar()">Cancelar</button>
+                                      <button id="cancelar" type="button" name="cancela" class="btn btn-default" onclick="voltar()">Cancelar</button>
                                       <button id="incluir" name="incluir" class="btn btn-primary">Salvar</button>
                                     </div>
                                 </div>    
@@ -229,64 +238,61 @@
 	</body>	
     <!-- /#wrapper -->
     <script type="text/javascript">
-        $(function(){
-            function Adicionar(){
-                    $("#tblCadastro tbody").append(
-                            "<tr>"+
-                            "<td><input type='text'/></td>"+
-                            "<td><input type='text'/></td>"+
-                            "<td><input type='text'/></td>"+
-                            "<td><img src='images/disk.png' class='btnSalvar'><img src='images/delete.png' class='btnExcluir'/></td>"+
-                            "</tr>");
+            function AddTableRow()
+            {
+                AddTableRow = function() {		
+                    var newRow = $("<tr>");
+                    var cols = "";	
+                    cols += '<td><input type="number" id="codigo" class="form-control" name="codigo" disabled="disabled"></td>';
+                    cols += '<td>\n\
+                    <%  
+                            //Query buscando produtos
+                            //ResultSet resultset=null;
+                            try{
+                                Class.forName("com.mysql.jdbc.Driver");
+                                Connection con=null;
+                                con=DriverManager.getConnection("jdbc:mysql://localhost:3306/producao","root","");
+                                Statement statement = con.createStatement();
+                                resultset =statement.executeQuery("select * from produto");
+                        %>\n\
+                        <select class="form-control" id="sel1" name="items">\n\
+                        <option></option>\n\
+                        <%while(resultset.next()){%>\n\
+                            <option value="<%= resultset.getString(1)%>"><%= resultset.getString(2)%></option>\n\
+                        <%}%>\n\
+                        </select>\n\
+                        <%
+                            }catch(Exception e){out.println("Entrada errada"+e);}
+                        %>\n\
+                    </td>';	
+                    cols += '<td><input type="number" class="form-control" name="items" ></td>';	
+                    cols += '<td><input type="number" class="form-control" name="items" ></td>';
+                    cols += '<td><input type="number" class="form-control" name="items" ></td>';
+                    cols += '<td>';		
+                    cols += '<button type="button" class="btn btn-danger" onclick="RemoveTableRow(this)"  class="btn btn-danger">Remover</button>';
+                    cols += '</td>';		
+                    newRow.append(cols);	
+                       
+                    $("#products-table").append(newRow);
+                    $("input[name='codigo']").each(function(ind) {
+                        $(this).val(ind + 1);
+                    }); 
+                    return false;	
+                };
+            }
+        </script>
+        <script type="text/javascript">
+            RemoveTableRow = function(handler) {
+                alert(handler);
+                var tr = $(handler).closest('tr');
 
-                    $(".btnSalvar").bind("click", Salvar);     
-                    $(".btnExcluir").bind("click", Excluir);
+                tr.fadeOut(400, function(){ 
+                  tr.remove(); 
+                }); 
+
+                return false;
             };
-
-            function Salvar(){
-                    var par = $(this).parent().parent(); //tr
-                    var tdNome = par.children("td:nth-child(1)");
-                    var tdTelefone = par.children("td:nth-child(2)");
-                    var tdEmail = par.children("td:nth-child(3)");
-                    var tdBotoes = par.children("td:nth-child(4)");
-
-                    tdNome.html(tdNome.children("input[type=text]").val());
-                    tdTelefone.html(tdTelefone.children("input[type=text]").val());
-                    tdEmail.html(tdEmail.children("input[type=text]").val());
-                    tdBotoes.html("<img src='images/delete.png'class='btnExcluir'/><img src='images/pencil.png' class='btnEditar'/>");
-
-                    $(".btnEditar").bind("click", Editar);
-                    $(".btnExcluir").bind("click", Excluir);
-            };
-
-            function Editar(){
-                    var par = $(this).parent().parent(); //tr
-                    var tdNome = par.children("td:nth-child(1)");
-                    var tdTelefone = par.children("td:nth-child(2)");
-                    var tdEmail = par.children("td:nth-child(3)");
-                    var tdBotoes = par.children("td:nth-child(4)");
-
-                    tdNome.html("<input type='text' id='txtNome' value='"+tdNome.html()+"'/>");
-                    tdTelefone.html("<input type='text'
-                              id='txtTelefone' value='"+tdTelefone.html()+"'/>");
-                    tdEmail.html("<input type='text' id='txtEmail' value='"+tdEmail.html()+"'/>");
-                    tdBotoes.html("<img src='images/disk.png' class='btnSalvar'/>");
-
-                    $(".btnSalvar").bind("click", Salvar);
-                    $(".btnEditar").bind("click", Editar);
-                    $(".btnExcluir").bind("click", Excluir);
-            };
-
-            function Excluir(){
-                var par = $(this).parent().parent(); //tr
-                par.remove();
-            };
-
-            $(".btnEditar").bind("click", Editar);
-            $(".btnExcluir").bind("click", Excluir);
-            $("#btnAdicionar").bind("click", Adicionar); 
-    });
-    </script>
+        </script>
     <script type="text/javascript">
         function voltar()
         {
