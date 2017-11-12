@@ -104,6 +104,16 @@
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
+                            <li>
+                                    <a href="#"><i class="fa fa-edit fa-fw"></i> Estoque<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+                                            <li>
+                                                    <a href="Estoque/index.jsp">Estoque</a>
+                                            </li>
+
+                                    </ul>
+                                    <!-- /.nav-second-level -->
+                            </li>
                         </ul>
                     </div>
                     <!-- /.sidebar-collapse -->
@@ -161,7 +171,27 @@
                                     </div>
                                 </div>
                             </div>
-
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="panel-body">
+                            <div class="col-lg-6">
+                                <div class="panel-group" id="accordion">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                    <a data-toggle="collapse" data-parent="#accordion" href="#estoque">Estoque</a>
+                                            </h4>
+                                        </div>
+                                        <div id="estoque" class="panel-collapse collapse in">
+                                            <div class="panel-body">
+                                                <a href="Estoque/index.jsp">Estoque</a><br>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>        
                         </div>
                     </div> 					
                     <!-- /.col-lg-4 -->
