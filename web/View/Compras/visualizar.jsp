@@ -197,12 +197,14 @@
                                                      <%  
                                                         //Query buscando produtos
                                                         //ResultSet resultset=null;
+                                                        
                                                         try{
                                                             Class.forName("com.mysql.jdbc.Driver");
                                                             Connection con=null;
                                                             con=DriverManager.getConnection("jdbc:mysql://localhost:3306/producao","root","");
                                                             Statement statement = con.createStatement();
-                                                            resultset =statement.executeQuery("select * from itemcompra where idcompra=49");
+                                                            
+                                                            resultset =statement.executeQuery("select * from itemcompra where idcompra='"+c.getId()+"'");
                                                             
                                                             int i = 1;
                                                     %>
