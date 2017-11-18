@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
  * @author porte
  */
 public class Produto {
-    private int id, categoria,quantidade;
+    private int id, categoria;
     private String nome, descricao, dvencimento, unidade;
     //private Date dnascimento;
     
@@ -53,7 +53,7 @@ public class Produto {
         this.unidade = unidade;
     }
 
-    public double getPrecoVenda() {
+    /*public double getPrecoVenda() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -69,6 +69,6 @@ public class Produto {
     }
     public void setQuantidade(int quantidade){
         this.quantidade = quantidade;
-    }
+    }*/
     
 }

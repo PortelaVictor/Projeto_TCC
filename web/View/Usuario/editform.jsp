@@ -156,7 +156,7 @@
 								</div>
 								<div class="form-group col-md-12">
 									<div class="col-md-4">
-									   <button id="cancelar" name="cancela" class="btn btn-default" onclick="voltar()">Cancelar</button>
+									   <button id="cancelar" type="button" name="cancela" class="btn btn-default" onclick="voltar()">Cancelar</button>
 									   <button id="Editar" name="Editar" class="btn btn-warning" value="Editar">Editar</button>
 									</div>
 								</div>    

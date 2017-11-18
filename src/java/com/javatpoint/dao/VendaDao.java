@@ -33,8 +33,11 @@ public class VendaDao {
         try{
             Connection con=getConnection();
             PreparedStatement ps=con.prepareStatement(
-            "insert into venda(cliente) values (?)", Statement.RETURN_GENERATED_KEYS);
+            "insert into venda(cliente,dvenda,contato,numero) values (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1,v.getCliente());
+            ps.setString(2,v.getDvenda());
+            ps.setString(3,v.getContato());
+            ps.setString(4,v.getNumero());
             status=ps.executeUpdate();
             
 
@@ -47,18 +50,17 @@ public class VendaDao {
                 //String sql = "INSERT INTO TBITEMCOMPRA (CODIGOPRODUTO, CODIGOCOMPRA, QUANTIDADE, VALORUNITARIO) VALUES (?, ?, ?, ?)";
                 ps=con.prepareStatement("insert into itemvenda(idvenda,idproduto,quantidade,valorunitario,valortotal) values (?,?,?,?,?)");
                 ps.setInt(1, idVenda);
-                ps.setString(2, items[i+0]);
-                ps.setString(3, items[i+1]);
-                ps.setString(4, items[i+2]);
-                ps.setString(5, items[i+3]);
+                ps.setString(2, items[i+1]);
+                ps.setString(3, items[i+2]);
+                ps.setString(4, items[i+3]);
+                ps.setString(5, items[i+4]);
                 ps.execute();
                 
-                lin = lin + 1 ;
                   
+                lin = lin + 1 ;
                 ps=con.prepareStatement("update produto set quantidade=quantidade-? where id=?") ;
-                ps.setInt(1, Integer.parseInt(items[i+0]));
-                ps.setInt(2, Integer.parseInt(items[i+1]));
-                
+                ps.setString(1, items[i+2]);
+                ps.setString(2, items[i+1]);
                 ps.execute();
             }            
             

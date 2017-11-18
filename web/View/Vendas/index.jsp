@@ -25,7 +25,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Compras</title>
+        <title>Vendas</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!-- Bootstrap Core CSS Importante menu lateral-->
         <link href="../../Model/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -157,28 +157,52 @@
                             <br><br>
                             <a class="btn btn-default" href="vendaform.jsp">Adicionar Vendas</a>
                             <br><br>
-                            <table class="table table-striped" cellspacing="0" cellpadding="0">
-                                <thead>
-                                    <tr>
-                                        <th>Venda<th>
-                                        <th class="actions">Ações</th>
-                                     </tr>
-                                </thead>
-                                <%while((rec!=null) && (rec.next())){%>
-                                <tbody>
+                            <div class="col-md-12" style="overflow-x: auto; height:400px">
+                                <table class="table table-striped" cellspacing="0" cellpadding="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Venda<th>
+                                            <th>Cliente<th>
+                                            <th class="actions">Ações</th>
+                                         </tr>
+                                    </thead>
+                                    <%while((rec!=null) && (rec.next())){%>
+                                    <tbody>
 
-                                    <tr>
-                                        <td><%=rec.getString("nome")%></td>
-                                        <td></td>
-                                       <td class="actions">
-                                            
-                                            <a class="btn btn-warning btn-xs" href="editform.jsp?id=<%=rec.getString("id")%>">Editar</a>
-                                            <a class="btn btn-danger btn-xs"  href="deleteform.jsp?id=<%=rec.getString("id")%>" >Excluir</a>
-                                        </td>
-                                    </tr>
-								<%}%>
-                                </tbody>
-                            </table>
+                                        <tr>
+                                            <td><%=rec.getInt("id")%></td>
+                                            <td></td>
+                                            <td>
+                                                <%
+                                                    //Query buscando cliente
+                                                    ResultSet resultset=null;
+                                                    try{
+                                                        Class.forName("com.mysql.jdbc.Driver");
+                                                        Connection con=null;
+                                                        con=DriverManager.getConnection("jdbc:mysql://localhost:3306/producao","root","");
+                                                        Statement statement = con.createStatement();
+                                                        resultset =statement.executeQuery("select * from cliente");
+                                                        while(resultset.next()){
+                                                    if(rec.getInt("cliente") == resultset.getInt(1)){
+                                                        %>
+                                                           <%=resultset.getString(2)%>
+                                                        <% 
+                                                        }
+                                                    }
+                                                }catch(Exception e){out.println("Entrada errada"+e);}
+                                                %>    
+                                            </td>
+                                            <td></td>
+                                           <td class="actions">
+
+                                                <a class="btn btn-warning btn-xs" href="editform.jsp?id=<%=rec.getString("id")%>">Editar</a>
+                                                <a class="btn btn-danger btn-xs"  href="deleteform.jsp?id=<%=rec.getString("id")%>" >Excluir</a>
+                                            </td>
+                                        </tr>
+                                                                    <%}%>
+                                    </tbody>
+                                </table>
+                            </div>
                             <%
                                 //fim da pesquisa e query
                                 }catch(Exception e){

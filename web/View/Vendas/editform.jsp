@@ -1,6 +1,6 @@
 <%-- 
-    Document   : produtoform
-    Created on : 16/09/2017, 20:45:24
+    Document   : editform
+    Created on : 15/11/2017, 14:03:47
     Author     : porte
 --%>
 
@@ -151,8 +151,7 @@
                                         %>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label for="dvenda">Data
-                                            :</label>
+                                        <label for="dvenda">Data:</label>
                                         <input type="date" class="form-control" name="dvenda" required >
                                     </div>
                                     <div class="form-group col-md-3">

@@ -25,7 +25,7 @@ public class ProdutoDao {
         try{
             Connection con=getConnection();
             PreparedStatement ps=con.prepareStatement(
-            "insert into produto(nome,descricao,dvencimento,categoria,unidade) values (?,?,?,?,?)");
+            "insert into produto(nome,descricao,dvencimento,categoria,unidade,quantidade) values (?,?,?,?,?,0)");
             ps.setString(1,p.getNome());
             ps.setString(2,p.getDescricao());
             ps.setString(3,p.getDvencimento());

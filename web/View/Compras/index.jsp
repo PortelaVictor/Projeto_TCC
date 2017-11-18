@@ -157,28 +157,55 @@
                             <br><br>
                             <a class="btn btn-default" href="compraform.jsp">Adicionar Compra</a>
                             <br><br>
-                            <table class="table table-striped" cellspacing="0" cellpadding="0">
-                                <thead>
-                                    <tr>
-                                        <th>Compra<th>
-                                        <th class="actions">Ações</th>
-                                     </tr>
-                                </thead>
-                                <%while((rec!=null) && (rec.next())){%>
-                                <tbody>
+                            <div class="col-md-12" style="overflow-x: auto; height:400px">
+                                <table class="table table-striped" cellspacing="0" cellpadding="0" >
+                                    <thead>
+                                        <tr>
+                                            <th>Id<th>
+                                            <th>Fornecedor<th>
+                                            <th>Total Compra<th>
+                                            <th class="actions">Ações</th>
+                                         </tr>
+                                    </thead>
+                                    <%while((rec!=null) && (rec.next())){%>
+                                    <tbody >
 
-                                    <tr>
-                                        <td><%=rec.getString("nome")%></td>
-                                        <td></td>
-                                       <td class="actions">
-                                            
-                                            <a class="btn btn-warning btn-xs" href="editform.jsp?id=<%=rec.getString("id")%>">Editar</a>
-                                            <a class="btn btn-danger btn-xs"  href="deleteform.jsp?id=<%=rec.getString("id")%>" >Excluir</a>
-                                        </td>
-                                    </tr>
-								<%}%>
-                                </tbody>
-                            </table>
+                                        <tr>
+                                            <td><%=rec.getString("id")%></td>
+                                            <td></td>
+                                            <td>
+                                                <%
+                                                    //Query buscando Fornecedor
+                                                    ResultSet resultset=null;
+                                                    try{
+                                                        Class.forName("com.mysql.jdbc.Driver");
+                                                        Connection con=null;
+                                                        con=DriverManager.getConnection("jdbc:mysql://localhost:3306/producao","root","");
+                                                        Statement statement = con.createStatement();
+                                                        resultset =statement.executeQuery("select * from fornecedor");
+                                                        while(resultset.next()){
+                                                        if(rec.getInt("fornecedor") == resultset.getInt(1)){
+                                                        %>
+                                                           <%=resultset.getString(2)%>
+                                                        <% 
+                                                        }
+                                                    }
+                                                }catch(Exception e){out.println("Entrada errada"+e);}
+                                                %>    
+                                            </td>
+                                            <td></td>
+                                            <td><%=rec.getString("totalcompra")%></td>
+                                            <td></td>
+                                           <td class="actions">
+
+                                                <a class="btn btn-warning btn-xs" href="visualizar.jsp?id=<%=rec.getString("id")%>">Visualizar</a>
+                                                <a class="btn btn-danger btn-xs"  href="deleteform.jsp?id=<%=rec.getString("id")%>" >Cancelar</a>
+                                            </td>
+                                        </tr>
+                                        <%}%>
+                                    </tbody>
+                                </table>
+                            </div>        
                             <%
                                 //fim da pesquisa e query
                                 }catch(Exception e){

@@ -16,13 +16,20 @@ import java.util.List;
  * @author porte
  */
 public class Compra {
-    private int id, fornecedor;
+    private int id, fornecedor,total;
+    private String dcompra,numero,contato;
     private List<ItemCompra> items;
+    //private Double totalcompra;
     
     public Compra() {
         this.id = 0;
         this.fornecedor = 0;
+        this.dcompra = "";
+        this.contato = "";
+        this.numero = "";
         this.items = new ArrayList<>();
+        //this.totalcompra = 0;
+        //totalcompra
       
     }
     public int getId(){
@@ -37,7 +44,26 @@ public class Compra {
     public void setFornecedor(int fornecedor){
         this.fornecedor = fornecedor;
     }
-    
+    public String getDcompra(){
+        return dcompra;
+    }
+    public void setDcompra(String dcompra) throws ParseException{
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        this.dcompra = dcompra;
+        java.sql.Date data = new java.sql.Date(format.parse(dcompra).getTime());
+    }
+    public String getContato(){
+        return contato;
+    }
+    public void setContato(String contato){
+        this.contato = contato;
+    }
+    public String getNumero(){
+        return numero;
+    }
+    public void setNumero(String numero){
+        this.numero = numero;
+    }
     public List<ItemCompra> getItens() {
         return items;
     }
@@ -48,7 +74,13 @@ public class Compra {
 
     public int quantidadeItens() {
         return items.size();
-    }    
-
+    }   
+    public int getTotal(){
+        return total;
+    }
+    public void setTotal(int total){
+        this.total = total;
+    }
+    
 
 }

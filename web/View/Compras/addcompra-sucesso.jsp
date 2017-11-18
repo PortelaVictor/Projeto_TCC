@@ -15,7 +15,7 @@
             <strong>Sucesso!</strong> Salvo.
         </div>
       
-        <jsp:include page="usuarioform.jsp"></jsp:include>
+        <jsp:include page="compraform.jsp"></jsp:include>
        
     </body>
 </html>

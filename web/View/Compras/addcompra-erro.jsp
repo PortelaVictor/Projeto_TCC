@@ -15,6 +15,6 @@
         
         <div class="alert alert-warning" role="alert">Não foi possivel salvar o registro.</div>
        
-        <jsp:include page="usuarioform.jsp"></jsp:include>
+        <jsp:include page="compraform.jsp"></jsp:include>
     </body>
 </html>

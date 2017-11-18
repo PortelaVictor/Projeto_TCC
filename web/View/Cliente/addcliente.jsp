@@ -11,8 +11,8 @@
 <%  
     int i=ClienteDao.save(c);  
     if(i>0){  
-        response.sendRedirect("clienteform-sucesso.jsp");  
+        response.sendRedirect("addcliente-sucesso.jsp");  
     }else{  
-        response.sendRedirect("clienteform-erro.jsp");  
+        response.sendRedirect("addcliente-erro.jsp");  
     }  
 %>

@@ -32,18 +32,22 @@ public class CompraDao {
         try{
             Connection con=getConnection();
             PreparedStatement ps=con.prepareStatement(
-            "insert into compra(fornecedor) values (?)", Statement.RETURN_GENERATED_KEYS);
+            "insert into compra(fornecedor,dcompra,contato,numero,totalcompra) values (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1,c.getFornecedor());
-            status=ps.executeUpdate();
+            ps.setString(2,c.getDcompra());
+            ps.setString(3,c.getContato());
+            ps.setString(4,c.getNumero());
+            ps.setInt(5,c.getTotal());
+            status=ps.executeUpdate();  
             
 
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();
             int idCompra = rs.getInt(1);
 
-            int lin = 0;    
+            //int lin = 0;    
             for (int i = 0; i < items.length; i=i+4) {
-                //String sql = "INSERT INTO TBITEMCOMPRA (CODIGOPRODUTO, CODIGOCOMPRA, QUANTIDADE, VALORUNITARIO) VALUES (?, ?, ?, ?)";
+                //String sql = "INSERT INTO TBITEMCOMPRA (CODIGOCOMPRA, CODIGOPRODUTO, QUANTIDADE, VALORUNITARIO) VALUES (?, ?, ?, ?)";
                 ps=con.prepareStatement("insert into itemcompra(idcompra,idproduto,quantidade,valorunitario,valortotal) values (?,?,?,?,?)");
                 ps.setInt(1, idCompra);
                 ps.setString(2, items[i+0]);
@@ -52,13 +56,12 @@ public class CompraDao {
                 ps.setString(5, items[i+3]);
                 ps.execute();
                 
-                lin = lin + 1 ;
                   
+                ////lin = lin + 1 ;
                 ps=con.prepareStatement("update produto set quantidade=quantidade+? where id=?") ;
-                ps.setInt(1, Integer.parseInt(items[i+0]));
-                ps.setInt(2, Integer.parseInt(items[i+1]));
-                
-                ps.execute();
+                ps.setString(1, items[i+1]);
+                ps.setString(2, items[i+0]);
+                ps.execute();      
             }            
             
         }catch(Exception e){System.out.println(e);}
@@ -96,6 +99,10 @@ public class CompraDao {
                 Compra c=new Compra();
                 c.setId(rs.getInt("id"));
                 c.setFornecedor(rs.getInt("fornecedor"));
+                c.setDcompra(rs.getString("dcompra"));
+                c.setContato(rs.getString("contato"));
+                c.setNumero(rs.getString("numero"));
+                c.setTotal(rs.getInt("total"));
                 list.add(c);
             }
         }catch(Exception e){System.out.println(e);}
@@ -112,6 +119,10 @@ public class CompraDao {
                 c=new Compra();
                 c.setId(rs.getInt("id"));
                 c.setFornecedor(rs.getInt("fornecedor"));
+                c.setDcompra(rs.getString("dcompra"));
+                c.setContato(rs.getString("contato"));
+                c.setNumero(rs.getString("numero"));
+                c.setTotal(rs.getInt("totalcompra"));
                 
             }
         }catch(Exception e){System.out.println(e);}

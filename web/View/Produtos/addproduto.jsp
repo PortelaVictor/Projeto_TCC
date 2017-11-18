@@ -11,7 +11,7 @@
 <%  
     int i=ProdutoDao.save(p);  
     if(i>0){  
-        response.sendRedirect("addproduto-successo.jsp");  
+        response.sendRedirect("addproduto-sucesso.jsp");  
     }else{  
         response.sendRedirect("addproduto-erro.jsp");  
     }  

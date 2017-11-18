@@ -157,27 +157,29 @@
                             <br><br>
                             <a class="btn btn-default" href="categoriaform.jsp">Adicionar Categoria</a>
                             <br><br>
-                            <table class="table table-striped" cellspacing="0" cellpadding="0">
-                                <thead>
-                                    <tr>
-                                        <th>Categoria<th>
-                                        <th class="actions">Ações</th>
-                                     </tr>
-                                </thead>
-                                <%while((rec!=null) && (rec.next())){%>
-                                <tbody>
-                                    <tr>
-                                        <td><%=rec.getString("nome")%></td>
-                                        <td></td>
-                                       <td class="actions">
-                                            
-                                            <a class="btn btn-warning btn-xs" href="editform.jsp?id=<%=rec.getString("id")%>">Editar</a>
-                                            <a class="btn btn-danger btn-xs"  href="deleteform.jsp?id=<%=rec.getString("id")%>" >Excluir</a>
-                                        </td>
-                                    </tr>
-                                <%}%>
-                                </tbody>
-                            </table>
+                            <div class="col-md-12" style="overflow-x: auto; height:400px">
+                                <table class="table table-striped" cellspacing="0" cellpadding="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Categoria<th>
+                                            <th class="actions">Ações</th>
+                                         </tr>
+                                    </thead>
+                                    <%while((rec!=null) && (rec.next())){%>
+                                    <tbody>
+                                        <tr>
+                                            <td><%=rec.getString("nome")%></td>
+                                            <td></td>
+                                           <td class="actions">
+
+                                                <a class="btn btn-warning btn-xs" href="editform.jsp?id=<%=rec.getString("id")%>">Editar</a>
+                                                <a class="btn btn-danger btn-xs"  href="deleteform.jsp?id=<%=rec.getString("id")%>" >Excluir</a>
+                                            </td>
+                                        </tr>
+                                    <%}%>
+                                    </tbody>
+                                </table>
+                            </div>
                             <%
                                 //fim da pesquisa e query
                                 }catch(Exception e){

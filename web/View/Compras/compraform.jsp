@@ -140,7 +140,7 @@
                                     %>
                                     <div class="form-group col-md-4">
                                         <label for="fornecedor">Fornecedor</label>
-                                        <select class="form-control" id="sel1" name="fornecedor">
+                                        <select class="form-control" id="sel1" name="fornecedor" required>
                                             <option></option>
                                             <%while(resultset.next()){%>
                                             <option value=<%= resultset.getString(1)%>><%= resultset.getString(2)%></option>
@@ -149,6 +149,23 @@
                                         <%
                                             }catch(Exception e){out.println("Entrada errada"+e);}
                                         %>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="dnascimento">Data
+                                            :</label>
+                                        <input type="date" class="form-control" name="dcompra" required >
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="contato">Contato:</label>
+                                        <input type="text" class="form-control" name="contato" >
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="numero">Número</label>
+                                        <input type="text" class="form-control" name="numero" >
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="totalcompra">Total Compra:</label>
+                                        <input type="number" id="totalcompra" name="total" class="form-control" value="0">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -181,7 +198,7 @@
                                             
                                             <c:forEach items="${items}" var="items">                                          
                                             <tr>
-                                                <td><input type="text" value="1" class="form-control"  id="codigo" name="codigo" disabled="disabled"></td>
+                                                <td><input type="number" value="1" class="form-control"  id="codigo" name="codigo" disabled="disabled"></td>
                                                 <td>
                                                     <%  
                                                         //Query buscando produtos
@@ -193,7 +210,7 @@
                                                             Statement statement = con.createStatement();
                                                             resultset =statement.executeQuery("select * from produto");
                                                     %>
-                                                    <select class="form-control" id="sel1" name="items">
+                                                    <select class="form-control" id="sel1" name="items" required>
                                                         <option></option>
                                                         <%while(resultset.next()){%>
                                                         <option value=<%= resultset.getString(1)%>><%= resultset.getString(2)%></option>
@@ -204,9 +221,9 @@
                                                     %>
 
                                                 </td>
-                                                <td><input type="number" class="form-control" name="items" ></td>
-                                                <td><input type='number' step='any' class="form-control" name="items" ></td>
-                                                <td><input type='number' step='any' class="form-control" name="items" ></td>
+                                                <td><input type="text" onkeyup="calc(this);" step='any' id="qnt1" class="form-control" name="items" required ></td>
+                                                <td><input type="text" onkeyup="calc(this);" step='any' id="valor_unitario1" class="form-control" name="items" required></td>
+                                                <td><input type="text" step='any' id="total1" class="form-control" name="items" ></td>
                                                 <!--<td>		 
                                                     <button onclick="RemoveTableRow(this)"  class="btn btn-danger">Remover</button>
                                                 </td>-->	
@@ -238,6 +255,30 @@
 	</body>	
     <!-- /#wrapper -->
     <script type="text/javascript">
+        
+        function calc(id) {
+            var tot=document.getElementById('totalcompra');
+            var row=id.parentNode.parentNode;
+            var quant=row.cells[2].getElementsByTagName('input')[0].value;
+            var price=row.cells[3].getElementsByTagName('input')[0].value;
+            var totant=row.cells[4].getElementsByTagName('input')[0].value;
+            var disc=null;//row.cells[3].getElementsByTagName('input')[0].value;
+            if(disc==null || disc=='') {
+             res=parseFloat(quant)*parseFloat(price);
+            } else {
+             var res=(parseFloat(quant)*parseFloat(price))-(parseFloat(quant)*parseFloat(price)*(parseFloat(disc)/100));
+            };
+            if(quant==null || quant=='' || price==null || price=='' ) {
+                res = 0 ;
+            }
+            row.cells[4].getElementsByTagName('input')[0].value=res;
+            tot.value=parseInt(tot.value)-totant+res;
+            
+            
+        }
+        
+        
+        
             function AddTableRow()
             {
                 AddTableRow = function() {		
@@ -265,9 +306,9 @@
                             }catch(Exception e){out.println("Entrada errada"+e);}
                         %>\n\
                     </td>';	
-                    cols += '<td><input type="number" class="form-control" name="items" ></td>';	
-                    cols += '<td><input type="number" class="form-control" name="items" ></td>';
-                    cols += '<td><input type="number" class="form-control" name="items" ></td>';
+                    cols += '<td><input type="text"  onkeyup="calc(this);" id="qnt" class="form-control" name="items" required ></td>';	
+                    cols += '<td><input type="text"  onkeyup="calc(this);" id="valor_unitario" class="form-control" name="items" required ></td>';
+                    cols += '<td><input type="text"  id="total" class="form-control" name="items" ></td>';
                     cols += '<td>';		
                     cols += '<button type="button" class="btn btn-danger" onclick="RemoveTableRow(this)"  class="btn btn-danger">Remover</button>';
                     cols += '</td>';		
@@ -276,14 +317,18 @@
                     $("#products-table").append(newRow);
                     $("input[name='codigo']").each(function(ind) {
                         $(this).val(ind + 1);
+                        
                     }); 
+                    
+                    
                     return false;	
                 };
             }
         </script>
+        
         <script type="text/javascript">
             RemoveTableRow = function(handler) {
-                alert(handler);
+                //alert(handler);
                 var tr = $(handler).closest('tr');
 
                 tr.fadeOut(400, function(){ 
@@ -293,6 +338,7 @@
                 return false;
             };
         </script>
+        
     <script type="text/javascript">
         function voltar()
         {

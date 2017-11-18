@@ -5,7 +5,7 @@
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
-<%@page import="com.javatpoint.dao.UsuarioDao,com.javatpoint.bean.Usuario"%>
+<%@page import="com.javatpoint.dao.ProdutoDao,com.javatpoint.bean.Produto"%>
 <%
     if ((session.getAttribute("id") == null) || (session.getAttribute("id") == "" )) {
 %>
@@ -21,7 +21,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Deletar Usuário</title>
+        <title>Deletar Produto</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!-- Bootstrap Core CSS Importante menu lateral-->
         <link href="../../Model/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -121,46 +121,73 @@
 				<div class="col-lg-12">
 					<div id="list" class="row">
 						<div class="table-responsive col-md-12">
-							<%
-								String id=request.getParameter("id");
-								Usuario u=UsuarioDao.getRecordById(Integer.parseInt(id));
-							%>    
-							<form action="deleteusuario.jsp" method="post">
-								<div class="col-md-12">
-									<input type="hidden" name="id" value="<%=u.getId()%>"/>
-									<div class="form-group col-md-6">
-										<label for="nome_completo"> Digite nome completo:</label>
-										<input type="text" class="form-control" name="nome" id="nome" disabled="disabled" value="<%=u.getNome()%>">
-									</div>
-									<div class="form-group col-md-6">
-										<label for="email">Informe e-mail:</label>
-										<input type="email" class="form-control" name="email" id="email" disabled="disabled" value="<%=u.getEmail()%>">
-									</div>
-									<div class="form-group col-md-4">
-										<label for="email">Informe login:</label>
-										<input type="text" class="form-control" name="login" id="login" disabled="disabled" value="<%=u.getLogin()%>">
-									</div>
-									<div class="form-group col-md-4">
-										<label for="email">Informe senha:</label>
-										<input type="password" class="form-control" name="senha" id="senha" disabled="disabled" value="<%=u.getSenha()%>">
-									</div>
-									<div class="form-group col-md-4">
-										<label for="perfil">Informe Perfil:</label>
-										<select class="form-control" id="sel1" name="perfil" id="perfil" disabled="disabled" >
-											<option><%= u.getPerfil()%></option>
-											<option>Administrador</option>
-											<option>Comprador</option>
-											<option>Vendedor</option>
-										</select>
-									</div>
-								</div>
-								<div class="form-group col-md-12">
-									<div class="col-md-4">
-										<button id="cancelar" name="cancela" class="btn btn-default" onclick="voltar()">Cancelar</button>
-										<button id="delete" name="delete" class="btn btn-danger">Deletar</button>
-									</div>
-								</div>    
-							</form>
+                                                    <%
+                                                            String id=request.getParameter("id");
+                                                            Produto p=ProdutoDao.getRecordById(Integer.parseInt(id));
+                                                    %>   
+                                                    <form action="deleteproduto.jsp" method="post">
+                                                            <div class="col-md-12">
+                                                            <input type="hidden" name="id" value="<%=p.getId()%>" disabled="disabled" />
+                                                        <div class="col-md-12">
+                                                            <div class="form-group col-md-3">
+                                                                <label for="nome_completo"> Nome:</label>
+                                                                <input type="text" class="form-control" name="nome" value="<%=p.getNome()%>" disabled="disabled" >
+                                                            </div>
+                                                            <div class="form-group col-md-3">
+                                                                <label for="descricao"> Descrição</label>
+                                                                <input type="text" class="form-control" name="descricao" value="<%=p.getDescricao()%>" disabled="disabled" >
+                                                            </div>
+                                                            <div class="form-group col-md-3">
+                                                                <label for="dvencimento">Vencimento:</label>
+                                                                <input type="date" class="form-control" name="dvencimento" value="<%=p.getDvencimento()%>"disabled="disabled" >
+                                                            </div>
+                                                            <%  
+                                                                //Query buscando categoria
+                                                                ResultSet resultset=null;
+                                                                try{
+                                                                    Class.forName("com.mysql.jdbc.Driver");
+                                                                    Connection con=null;
+                                                                    con=DriverManager.getConnection("jdbc:mysql://localhost:3306/producao","root","");
+                                                                    Statement statement = con.createStatement();
+                                                                    resultset =statement.executeQuery("select id,nome from categoria");
+                                                            %>
+                                                            <div class="form-group col-md-4">
+                                                                <label for="categoria">Categoria</label>
+                                                                <select class="form-control" id="sel1" name="categoria">
+                                                                    <%while(resultset.next()){
+                                                                        if(p.getCategoria()==resultset.getInt(1)){
+                                                                        %>
+                                                                            <option selected value=<%= resultset.getString(1)%>><%= resultset.getString(2)%></option>
+                                                                        <% 
+                                                                        } else {
+                                                                        %>
+                                                                            <option value=<%= resultset.getString(1)%>><%= resultset.getString(2)%></option>
+                                                                        <% 
+                                                                        }
+                                                                    }
+                                                                    %>
+                                                                </select>
+                                                                <%
+                                                                    }catch(Exception e){out.println("Entrada errada"+e);}
+                                                                %>
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label for="unidade">Unidade:</label>
+                                                                <select class="form-control" id="sel1" name="unidade">
+                                                                    <option value="<%=p.getUnidade()%>"disabled="disabled"><%=p.getUnidade()%></option>
+                                                                    <option>Caixa</option>
+                                                                    <option>Lt</option>
+                                                                    <option>m</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>	
+                                                        <div class="form-group col-md-12">
+                                                            <div class="col-md-4">
+                                                                <button id="cancelar" type="button" name="cancela" class="btn btn-default" onclick="voltar()">Cancelar</button>
+                                                                <button id="delete" name="delete" class="btn btn-danger">Deletar</button>
+                                                            </div>
+                                                        </div>    
+                                                    </form>
 						</div>
 					</div> <!-- /#list -->
 				</div>

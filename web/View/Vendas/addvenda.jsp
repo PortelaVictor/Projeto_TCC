@@ -4,16 +4,16 @@
     Author     : porte
 --%>
 
-<%@page import="com.javatpoint.dao.CompraDao"%>  
-<jsp:useBean id="c" class="com.javatpoint.bean.Compra"></jsp:useBean>  
-<jsp:setProperty property="*" name="c"/>  
+<%@page import="com.javatpoint.dao.VendaDao"%>  
+<jsp:useBean id="v" class="com.javatpoint.bean.Venda"></jsp:useBean>  
+<jsp:setProperty property="*" name="v"/>  
 
 <%
     
     String[] values = request.getParameterValues("items");   
     
  
-    int i=CompraDao.save(c,values);     
+    int i=VendaDao.save(v,values);     
     if(i>0){   
         response.sendRedirect("addvenda-sucesso.jsp");  
     }else{  
