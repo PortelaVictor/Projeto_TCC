@@ -15,7 +15,7 @@ import java.util.List;
  * @author porte
  */
 public class Venda {
-     private int id, cliente;
+     private int id, cliente,total;
      private String dvenda,numero,contato;
     private List<ItemVenda> items;
     
@@ -59,6 +59,12 @@ public class Venda {
     }
     public void setNumero(String numero){
         this.numero = numero;
+    }
+    public int getTotal(){
+        return total;
+    }
+    public void setTotal(int total){
+        this.total = total;
     }
     public List<ItemVenda> getItens() {
         return items;

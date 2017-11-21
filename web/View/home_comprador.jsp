@@ -71,35 +71,12 @@
                             <li>
                                 <a href="home_administrador.jsp"><i class="fa fa-dashboard fa-fw"></i> Início</a>
                             </li>
+                            
                             <li>
-                                <a href="#"><i class="fa fa-files-o fa-fw"></i> Cadastros Básicos<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="Categoria/index.jsp">Categoria</a>
-                                    </li>
-                                    <li>
-                                         <a href="Cliente/index.jsp">Cliente</a>
-                                    </li>
-                                    <li>    
-                                         <a href="Fornecedor/index.jsp">Fornecedor</a>
-                                    </li>
-                                    <li>    
-                                       <a href="Produtos/index.jsp">Produtos</a>
-                                    </li>
-                                    <li>    
-                                        <a href="Usuario/index.jsp">Usuário</a>
-                                    </li>
-                                </ul>
-                                <!-- /.nav-second-level -->
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-edit fa-fw"></i> Compras / Vendas<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-edit fa-fw"></i> Compras <span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
                                         <a href="Compras/index.jsp">Compras</a>
-                                    </li>
-                                    <li>
-                                        <a href="Vendas/index.jsp">Vendas</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
@@ -134,47 +111,25 @@
                     <!-- /.col-lg-8 -->
                     <div class="col-lg-12">
                         <div class="panel-body">
+                            
                             <div class="col-lg-6">
                                 <div class="panel-group" id="accordion">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordion" href="#comum">Cadastros Básicos</a>
-                                            </h4>
-                                        </div>
-                                        <div id="comum" class="panel-collapse collapse in">
-                                            <div class="panel-body">
-                                                <a href="Categoria/index.jsp">Categoria</a><br>
-                                                <a href="Cliente/index.jsp">Cliente</a><br>
-                                                <a href="Fornecedor/index.jsp">Fornecedor</a><br> 
-                                                <a href="Produtos/index.jsp">Produtos</a><br>
-                                                <a href="Usuario/index.jsp">Usuário</a><br>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="panel-group" id="accordion">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordion" href="#comprasvendas">Compras / Vendas</a>
+                                                    <a data-toggle="collapse" data-parent="#accordion" href="#comprasvendas">Compras</a>
                                             </h4>
                                         </div>
                                         <div id="comprasvendas" class="panel-collapse collapse in">
                                             <div class="panel-body">
                                                 <a href="Compras/index.jsp">Compras</a><br>
-                                                <a href="Vendas/index.jsp">Vendas</a><br>
+                                                
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="panel-body">
+                       
                             <div class="col-lg-6">
                                 <div class="panel-group" id="accordion">
                                     <div class="panel panel-default">
@@ -193,7 +148,7 @@
                                 </div>
                             </div>        
                         </div>
-                    </div> 					
+                    					
                     <!-- /.col-lg-4 -->
                 </div>
                 <!-- /.row -->

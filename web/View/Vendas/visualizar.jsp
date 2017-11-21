@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
-<%@page import="com.javatpoint.dao.CompraDao,com.javatpoint.bean.Compra"%>
+<%@page import="com.javatpoint.dao.VendaDao,com.javatpoint.bean.Venda"%>
 <%
     if ((session.getAttribute("id") == null) || (session.getAttribute("id") == "" )) {
 %>
@@ -115,7 +115,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header"> Compra</h1>
+                    <h1 class="page-header"> Venda</h1>
                 </div>
                 <!-- /.col-lg-12 -->
                 <div class="col-lg-12">
@@ -123,13 +123,13 @@
                         <div class="table-responsive col-md-12">
                             <%
                                 String id=request.getParameter("id");
-                                Compra c=CompraDao.getRecordById(Integer.parseInt(id));
+                                Venda v=VendaDao.getRecordById(Integer.parseInt(id));
                             %>    
                             <form action="editcategoria.jsp" method="post">
                                 <div class="col-md-12">
                                     <div class="form-group col-md-6">
                                         <label for="email">ID:</label>
-                                        <input type="text" class="form-control" name="contato" id="email" value="<%=c.getId()%>">
+                                        <input type="text" class="form-control" name="contato" id="email" value="<%=v.getId()%>">
                                     </div>
                                     <%  
                                         //Query buscando categoria
@@ -139,13 +139,13 @@
                                             Connection con=null;
                                             con=DriverManager.getConnection("jdbc:mysql://localhost:3306/producao","root","");
                                             Statement statement = con.createStatement();
-                                            resultset =statement.executeQuery("select id,nome from fornecedor");
+                                            resultset =statement.executeQuery("select id,nome from cliente");
                                     %>
                                     <div class="form-group col-md-4">
-                                        <label for="fornecedor">Fornecedor</label>
-                                        <select class="form-control" id="sel1" name="fornecedor">
+                                        <label for="cliente">Cliente</label>
+                                        <select class="form-control" id="sel1" name="cliente">
                                         <%while(resultset.next()){
-                                            if(c.getFornecedor()==resultset.getInt(1)){
+                                            if(v.getCliente()==resultset.getInt(1)){
                                             %>
                                                 <option selected value=<%= resultset.getString(1)%>><%= resultset.getString(2)%></option>
                                             <% 
@@ -162,20 +162,20 @@
                                         %>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label for="dnascimento">Data Compra:</label>
-                                        <input type="date" class="form-control" name="dcompra" value="<%=c.getDcompra()%>" required >
+                                        <label for="dnascimento">Data Venda:</label>
+                                        <input type="date" class="form-control" name="dcompra" value="<%=v.getDvenda()%>" required >
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="email">Contato:</label>
-                                        <input type="text" class="form-control" name="contato" id="email" value="<%=c.getContato()%>">
+                                        <input type="text" class="form-control" name="contato" id="email" value="<%=v.getContato()%>">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="email">Numero:</label>
-                                        <input type="text" class="form-control" name="numero" id="email" value="<%=c.getNumero()%>" >
+                                        <input type="text" class="form-control" name="numero" id="email" value="<%=v.getNumero()%>" >
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="email">Total</label>
-                                        <input type="number" class="form-control" name="total" id="email" value="<%=c.getTotal()%>" >
+                                        <input type="number" class="form-control" name="total" id="email" value="<%=v.getTotal()%>" >
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -190,10 +190,6 @@
                                         </thead>
                                         <tbody>	
                                             
-
-                                            
-                                            
-
                                                      <%  
                                                         //Query buscando produtos
                                                         //ResultSet resultset=null;
@@ -204,8 +200,8 @@
                                                             con=DriverManager.getConnection("jdbc:mysql://localhost:3306/producao","root","");
                                                             Statement statement = con.createStatement();
                                                             
-                                                            resultset =statement.executeQuery("select * from itemcompra where idcompra='"+c.getId()+"'");
-                                                            resultset =statement.executeQuery("select * from fornecedor");
+                                                            resultset =statement.executeQuery("select * from itemvenda where idvenda='"+v.getId()+"'");
+                                                            
                                                             int i = 1;
                                                     %>
                                                             <%while(resultset.next()){%>

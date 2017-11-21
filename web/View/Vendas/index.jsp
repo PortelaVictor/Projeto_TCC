@@ -163,6 +163,7 @@
                                         <tr>
                                             <th>Venda<th>
                                             <th>Cliente<th>
+                                            <th>Total<th>
                                             <th class="actions">Ações</th>
                                          </tr>
                                     </thead>
@@ -193,10 +194,12 @@
                                                 %>    
                                             </td>
                                             <td></td>
+                                            <td><%=rec.getInt("totalvenda")%></td>
+                                            <td></td>
                                            <td class="actions">
 
-                                                <a class="btn btn-warning btn-xs" href="editform.jsp?id=<%=rec.getString("id")%>">Editar</a>
-                                                <a class="btn btn-danger btn-xs"  href="deleteform.jsp?id=<%=rec.getString("id")%>" >Excluir</a>
+                                                <a class="btn btn-warning btn-xs" href="visualizar.jsp?id=<%=rec.getString("id")%>">Visualizar</a>
+                                                <a class="btn btn-danger btn-xs"  href="deleteform.jsp?id=<%=rec.getString("id")%>" >Cancelar</a>
                                             </td>
                                         </tr>
                                                                     <%}%>

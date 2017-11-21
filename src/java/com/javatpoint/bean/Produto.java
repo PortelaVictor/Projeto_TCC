@@ -1,7 +1,7 @@
 
 package com.javatpoint.bean;
 
-import java.sql.Date;
+//import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
  *
  * @author porte
  */
-public class Produto {
+public class Produto extends Categoria {
     private int id, categoria;
     private String nome, descricao, dvencimento, unidade;
     //private Date dnascimento;
@@ -53,22 +53,5 @@ public class Produto {
         this.unidade = unidade;
     }
 
-    /*public double getPrecoVenda() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public double getPrecoCompra() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public int getCodigo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    public int getQuantidade(){
-        return quantidade;
-    }
-    public void setQuantidade(int quantidade){
-        this.quantidade = quantidade;
-    }*/
     
 }

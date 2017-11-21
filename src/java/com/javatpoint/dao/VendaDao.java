@@ -33,11 +33,12 @@ public class VendaDao {
         try{
             Connection con=getConnection();
             PreparedStatement ps=con.prepareStatement(
-            "insert into venda(cliente,dvenda,contato,numero) values (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            "insert into venda(cliente,dvenda,contato,numero,totalvenda) values (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1,v.getCliente());
             ps.setString(2,v.getDvenda());
             ps.setString(3,v.getContato());
             ps.setString(4,v.getNumero());
+            ps.setInt(5,v.getTotal());
             status=ps.executeUpdate();
             
 
@@ -45,23 +46,32 @@ public class VendaDao {
             rs.next();
             int idVenda = rs.getInt(1);
 
-            int lin = 0;    
+             
             for (int i = 0; i < items.length; i=i+4) {
                 //String sql = "INSERT INTO TBITEMCOMPRA (CODIGOPRODUTO, CODIGOCOMPRA, QUANTIDADE, VALORUNITARIO) VALUES (?, ?, ?, ?)";
                 ps=con.prepareStatement("insert into itemvenda(idvenda,idproduto,quantidade,valorunitario,valortotal) values (?,?,?,?,?)");
                 ps.setInt(1, idVenda);
-                ps.setString(2, items[i+1]);
-                ps.setString(3, items[i+2]);
-                ps.setString(4, items[i+3]);
-                ps.setString(5, items[i+4]);
+                ps.setString(2, items[i+0]);
+                ps.setString(3, items[i+1]);
+                ps.setString(4, items[i+2]);
+                ps.setString(5, items[i+3]);
                 ps.execute();
                 
-                  
-                lin = lin + 1 ;
+              
+                // verificação se tem item no estoque 
+                /*try {
+                    if (iv.getQuantidade() > produtoDAO.recuperar(iv.getProduto().getCodigo()).getQuantidade()) {
+                        JOptionPane.showMessageDialog(this, "Impossível finalizar.\nProduto " + iv.getProduto() + " em falta no estoque.", "Alerta", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Erro ao consultar o estoque.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }*/
                 ps=con.prepareStatement("update produto set quantidade=quantidade-? where id=?") ;
-                ps.setString(1, items[i+2]);
-                ps.setString(2, items[i+1]);
-                ps.execute();
+                ps.setString(1, items[i+1]);
+                ps.setString(2, items[i+0]);
+                ps.execute(); 
             }            
             
         }catch(Exception e){System.out.println(e);}
@@ -99,6 +109,11 @@ public class VendaDao {
                 Venda v=new Venda();
                 v.setId(rs.getInt("id"));
                 v.setCliente(rs.getInt("cliente"));
+                v.setCliente(rs.getInt("cliente"));
+                v.setDvenda(rs.getString("dvenda"));
+                v.setContato(rs.getString("contato"));
+                v.setNumero(rs.getString("numero"));
+                v.setTotal(rs.getInt("total"));
                 list.add(v);
             }
         }catch(Exception e){System.out.println(e);}
@@ -113,8 +128,12 @@ public class VendaDao {
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
                 v=new Venda();
-                v.setId(rs.getInt("id"));
                 v.setCliente(rs.getInt("cliente"));
+                v.setCliente(rs.getInt("cliente"));
+                v.setDvenda(rs.getString("dvenda"));
+                v.setContato(rs.getString("contato"));
+                v.setNumero(rs.getString("numero"));
+                v.setTotal(rs.getInt("totalvenda"));
                 
             }
         }catch(Exception e){System.out.println(e);}
