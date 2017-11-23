@@ -5,12 +5,16 @@
 --%>
 
 <%@page import="com.javatpoint.dao.ClienteDao"%>  
-<jsp:useBean id="c" class="com.javatpoint.bean.Cliente"></jsp:useBean>  
-<jsp:setProperty property="*" name="c"/>  
-  
-<%  
-    int i=ClienteDao.save(c);  
-    if(i>0){  
+<jsp:useBean id="cj" class="com.javatpoint.bean.Clientejuridico"></jsp:useBean>  
+<jsp:setProperty property="*" name="cj"/>  
+
+<%
+    
+    //String[] values = request.getParameterValues("dados");   
+    
+ 
+    int i=ClienteDao.save(cj);     
+    if(i>0){   
         response.sendRedirect("addcliente-sucesso.jsp");  
     }else{  
         response.sendRedirect("addcliente-erro.jsp");  

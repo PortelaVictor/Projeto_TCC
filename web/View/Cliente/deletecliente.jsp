@@ -5,9 +5,9 @@
 --%>
 
 <%@page import="com.javatpoint.dao.ClienteDao"%>
-<jsp:useBean id="c" class="com.javatpoint.bean.Cliente"></jsp:useBean>
-<jsp:setProperty property="*" name="c"/>
+<jsp:useBean id="cj" class="com.javatpoint.bean.Clientejuridico"></jsp:useBean>
+<jsp:setProperty property="*" name="cj"/>
 <%
-    ClienteDao.delete(c);
+    ClienteDao.delete(cj);
     response.sendRedirect("index.jsp");
 %>

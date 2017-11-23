@@ -126,13 +126,16 @@
                             <form action="addcliente.jsp" method="post">
                                 <div class="col-md-12">
                                     <div class="row">
+                                        <div class="box">
+                                            <h4 class="underline">Informações de Pessoa Física</h4>
+                                        </div>
                                         <div class="form-group col-md-6">
                                             <label for="nome"> Nome:</label>
                                             <input type="text" class="form-control" name="nome" required>
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <label for="cpfcnpj">CPF/CNPJ:</label>
-                                            <input type="text" class="form-control" name="cpfcnpj" required>
+                                            <label for="cpfcnpj">CPF:</label>
+                                            <input type="text" class="form-control" name="cpfcnpj" >
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="dnascimento">Data Nascimento:</label>
@@ -146,11 +149,29 @@
                                             <label for="email">Informe e-mail:</label>
                                             <input type="email" class="form-control" name="email" required>
                                         </div>
-                                    </div>    
+                                    </div>   
+                                    <div class="row">
+                                        <div class="box">
+                                            <h4 class="underline">Informações de Pessoa Júridica</h4>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-3">
+                                            <label for="cnpj">CNPJ:</label>
+                                            <input type="text" class="form-control" id="cnpj" name="cnpj" >
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="ie">IE:</label>
+                                            <input type="text" class="form-control" id="ie" name="ie">
+                                        </div>
+                                       
+                                    </div>
+                                </div>    
+                            <div class="col-md-12">
+                                <div class="row">
                                     <div class="box">
                                         <h4 class="underline">Informações de Endereço</h4>
                                     </div>
-                                    <div class="row">
+                                    
                                         <div class="form-group col-md-3">
                                             <label for="cep">CEP:</label>
                                             <input type="text" class="form-control" name="cep" required>
@@ -213,9 +234,9 @@
                                           <button id="incluir" name="incluir" class="btn btn-primary">Salvar</button>
                                         </div>
                                     </div>
-                                </div>    
-                            </form>
-                        </div>
+                                </div>
+                        </form>
+                        
                     </div> <!-- /#list -->
                 </div>
             </div>

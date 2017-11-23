@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
-<%@page import="com.javatpoint.dao.ClienteDao,com.javatpoint.bean.Cliente"%>
+<%@page import="com.javatpoint.dao.ClienteDao,com.javatpoint.bean.Clientejuridico"%>
 <%
     if ((session.getAttribute("id") == null) || (session.getAttribute("id") == "" )) {
 %>
@@ -124,32 +124,47 @@
 						<div class="table-responsive col-md-12">
 							<%
                                                             String id=request.getParameter("id");
-                                                            Cliente c=ClienteDao.getRecordById(Integer.parseInt(id));
+                                                            Clientejuridico cj=ClienteDao.getRecordById(Integer.parseInt(id));
 							%>     
 							<form action="deletecliente.jsp" method="post">
                                                             <div class="col-md-12">
-                                                                <input type="hidden" name="id" value="<%=c.getId()%>"/>
+                                                                <input type="hidden" name="id" value="<%=cj.getId()%>"/>
                                                                 <div class="row">
                                                                     <div class="form-group col-md-6">
                                                                         <label for="nome"> Nome:</label>
-                                                                        <input type="text" class="form-control" name="nome" value="<%=c.getNome()%>" disabled="disabled">
+                                                                        <input type="text" class="form-control" name="nome" value="<%=cj.getNome()%>" disabled="disabled">
                                                                     </div>
                                                                     <div class="form-group col-md-3">
-                                                                        <label for="cpfcnpj">CPF/CNPJ:</label>
-                                                                        <input type="text" class="form-control" name="cpfcnpj" value="<%=c.getCpfcnpj()%>" disabled="disabled">
+                                                                        <label for="cpfcnpj">CPF:</label>
+                                                                        <input type="text" class="form-control" name="cpfcnpj" value="<%=cj.getCpfcnpj()%>" disabled="disabled">
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="dnascimento">Data Nascimento:</label>
-                                                                        <input type="date" class="form-control" name="dnascimento" value="<%=c.getDnascimento()%>" disabled="disabled">
+                                                                        <input type="date" class="form-control" name="dnascimento" value="<%=cj.getDnascimento()%>" disabled="disabled">
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="contato">Contato:</label>
-                                                                        <input type="text" class="form-control" name="contato" value="<%=c.getContato()%>" disabled="disabled">
+                                                                        <input type="text" class="form-control" name="contato" value="<%=cj.getContato()%>" disabled="disabled">
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="email">Informe e-mail:</label>
-                                                                        <input type="email" class="form-control" name="email" value="<%=c.getEmail()%>" disabled="disabled">
+                                                                        <input type="email" class="form-control" name="email" value="<%=cj.getEmail()%>" disabled="disabled">
                                                                     </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="box">
+                                                                        <h4 class="underline">Informações de Pessoa Júridica</h4>
+                                                                    </div>
+
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="cnpj">CNPJ:</label>
+                                                                        <input type="text" class="form-control" id="cnpj" name="cnpj" value="<%=cj.getCnpj()%> "disabled="disabled" >
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="ie">IE:</label>
+                                                                        <input type="text" class="form-control" id="ie" name="ie" value="<%=cj.getIE()%>" disabled="disabled">
+                                                                    </div>
+
                                                                 </div>    
                                                                 <div class="box">
                                                                     <h4 class="underline">Informações de Endereço</h4>
@@ -157,24 +172,24 @@
                                                                 <div class="row">
                                                                     <div class="form-group col-md-3">
                                                                         <label for="cep">CEP:</label>
-                                                                        <input type="text" class="form-control" name="cep" value="<%=c.getCep()%>" disabled="disabled">
+                                                                        <input type="text" class="form-control" name="cep" value="<%=cj.getCep()%>" disabled="disabled">
                                                                     </div>
                                                                     <div class="form-group col-md-6">
                                                                         <label for="endereco">Endereço:</label>
-                                                                        <input type="text" class="form-control" name="endereco" value="<%=c.getEndereco()%>" disabled="disabled">
+                                                                        <input type="text" class="form-control" name="endereco" value="<%=cj.getEndereco()%>" disabled="disabled">
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="numero">Numero:</label>
-                                                                        <input type="number" class="form-control" name="numero" value="<%=c.getNumero()%>" disabled="disabled">
+                                                                        <input type="number" class="form-control" name="numero" value="<%=cj.getNumero()%>" disabled="disabled">
                                                                     </div>
                                                                     <div class="form-group col-md-6">
                                                                         <label for="complemento">Complemento:</label>
-                                                                        <input type="text" class="form-control" name="complemento" value="<%=c.getComplemento()%>" disabled="disabled">
+                                                                        <input type="text" class="form-control" name="complemento" value="<%=cj.getComplemento()%>" disabled="disabled">
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="estado">Estado:</label>
                                                                         <select class="form-control" id="sel1" name="estado" disabled="disabled">
-                                                                            <option><%= c.getEstado()%></option> 
+                                                                            <option><%= cj.getEstado()%></option> 
                                                                             <option>Acre</option> 
                                                                             <option>Alagoas</option> 
                                                                             <option>Amazonas</option> 
@@ -206,7 +221,7 @@
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="cidade">Cidade:</label>
-                                                                        <input type="text" class="form-control" name="cidade" value="<%=c.getCidade()%>" disabled="disabled">
+                                                                        <input type="text" class="form-control" name="cidade" value="<%=cj.getCidade()%>" disabled="disabled">
                                                                     </div>
                                                                 </div>
                                                             </div>        

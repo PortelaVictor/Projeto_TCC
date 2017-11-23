@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import com.javatpoint.bean.Cliente;
-
+import com.javatpoint.bean.Clientejuridico;
 public class ClienteDao {
     public static Connection getConnection(){
         Connection con=null;
@@ -20,111 +20,126 @@ public class ClienteDao {
         return con;
     }
     
-    public static int save(Cliente c){
+    public static int save(Clientejuridico cj){//,String[] dados){
         int status=0;
+        //String[] teste = dados;
         try{
             
             Connection con=getConnection();
             PreparedStatement ps=con.prepareStatement(
-            "insert into cliente(nome, cpfcnpj, dnascimento, contato, email, cep, endereco, numero, complemento, estado, cidade) values (?,?,?,?,?,?,?,?,?,?,?)");
-            ps.setString(1,c.getNome());
-            ps.setString(2,c.getCpfcnpj());
-            ps.setString(3,c.getDnascimento());
+            "insert into cliente(nome, cpfcnpj, dnascimento, contato, email, cep, endereco, numero, complemento, estado, cidade) values (?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1,cj.getNome());
+            ps.setString(2,cj.getCpfcnpj());
+            ps.setString(3,cj.getDnascimento());
             //ps.setDate(3, new Date(c.getDnascimento().getTime()));
-            ps.setString(4,c.getContato());
-            ps.setString(5,c.getEmail());
-            ps.setString(6,c.getCep());
-            ps.setString(7,c.getEndereco());
-            ps.setInt(8,c.getNumero());
-            ps.setString(9,c.getComplemento());
-            ps.setString(10,c.getEstado());
-            ps.setString(11,c.getCidade());
-            status=ps.executeUpdate();
+            ps.setString(4,cj.getContato());
+            ps.setString(5,cj.getEmail());
+            ps.setString(6,cj.getCep());
+            ps.setString(7,cj.getEndereco());
+            ps.setInt(8,cj.getNumero());
+            ps.setString(9,cj.getComplemento());
+            ps.setString(10,cj.getEstado());
+            ps.setString(11,cj.getCidade());
+            status=ps.executeUpdate();   
+            
+            
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            int idCliente = rs.getInt(1);
+            //for (int i = 0; i < dados.length; i=i+2) {
+                ps=con.prepareStatement("insert into clientejuridico(idcliente,cnpj,ie) values (?,?,?)");
+                ps.setInt(1, idCliente);
+                ps.setString(2, cj.getCnpj());//dados[i+0]);
+                ps.setString(3, cj.getIE());//dados[i+1]);
+                status=ps.executeUpdate();
+                
+            //}*/    
+            
         }catch(Exception e){System.out.println(e);}
         return status;
     }
-    public static int update(Cliente c){
+    public static int update(Clientejuridico cj){
         int status=0;
         try{
             Connection con=getConnection();
             PreparedStatement ps=con.prepareStatement(
             "update cliente set nome=?, cpfcnpj=?, dnascimento=?, contato=?, email=?, cep=?, endereco=?, numero=?, complemento=?, estado=?, cidade=? where id=?");
-            ps.setString(1,c.getNome());
-            ps.setString(2,c.getCpfcnpj());
-            ps.setString(3,c.getDnascimento());
+            ps.setString(1,cj.getNome());
+            ps.setString(2,cj.getCpfcnpj());
+            ps.setString(3,cj.getDnascimento());
             //ps.setDate(3, new Date(c.getDnascimento().getTime()));
-            ps.setString(4,c.getContato());
-            ps.setString(5,c.getEmail());
-            ps.setString(6,c.getCep());
-            ps.setString(7,c.getEndereco());
-            ps.setInt(8,c.getNumero());
-            ps.setString(9,c.getComplemento());
-            ps.setString(10,c.getEstado());
-            ps.setString(11,c.getCidade());
-            ps.setInt(12,c.getId());
+            ps.setString(4,cj.getContato());
+            ps.setString(5,cj.getEmail());
+            ps.setString(6,cj.getCep());
+            ps.setString(7,cj.getEndereco());
+            ps.setInt(8,cj.getNumero());
+            ps.setString(9,cj.getComplemento());
+            ps.setString(10,cj.getEstado());
+            ps.setString(11,cj.getCidade());
+            ps.setInt(12,cj.getId());
             status=ps.executeUpdate();
         }catch(Exception e){System.out.println(e);}
         return status;
     }
-    public static int delete(Cliente c){
+    public static int delete(Clientejuridico cj){
         int status=0;
         try{
             Connection con=getConnection();
             PreparedStatement ps=con.prepareStatement("delete from cliente where id=?");
-            ps.setInt(1,c.getId());
+            ps.setInt(1,cj.getId());
             status=ps.executeUpdate();
         }catch(Exception e){System.out.println(e);}
         return status;
     }
-    public static List<Cliente> getAllRecords(){
-        List<Cliente> list=new ArrayList<Cliente>();
+    public static List<Clientejuridico> getAllRecords(){
+        List<Clientejuridico> list=new ArrayList<Clientejuridico>();
         try{
             Connection con=getConnection();
             PreparedStatement ps=con.prepareStatement("select * from cliente");
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
-                Cliente c=new Cliente();
-                c.setId(rs.getInt("id"));
-                c.setNome(rs.getString("nome"));
-                c.setCpfcnpj(rs.getString("cpfcnpj"));
-                c.setDnascimento(rs.getString("dnascimento"));
+                Clientejuridico cj =new Clientejuridico();
+                cj.setId(rs.getInt("id"));
+                cj.setNome(rs.getString("nome"));
+                cj.setCpfcnpj(rs.getString("cpfcnpj"));
+                cj.setDnascimento(rs.getString("dnascimento"));
                 //c.setDnascimento(rs.getDnascimento("dnascimento"));
-                c.setContato(rs.getString("contato"));
-                c.setEmail(rs.getString("email"));
-                c.setCep(rs.getString("cep"));
-                c.setEndereco(rs.getString("endereco"));
-                c.setNumero(rs.getInt("numero"));
-                c.setComplemento(rs.getString("complemento"));
-                c.setEstado(rs.getString("estado"));
-                c.setCidade(rs.getString("cidade"));
-                list.add(c);
+                cj.setContato(rs.getString("contato"));
+                cj.setEmail(rs.getString("email"));
+                cj.setCep(rs.getString("cep"));
+                cj.setEndereco(rs.getString("endereco"));
+                cj.setNumero(rs.getInt("numero"));
+                cj.setComplemento(rs.getString("complemento"));
+                cj.setEstado(rs.getString("estado"));
+                cj.setCidade(rs.getString("cidade"));
+                list.add(cj);
             }
         }catch(Exception e){System.out.println(e);}
         return list;
      }
-    public static Cliente getRecordById(int id){
-        Cliente c=null;
+    public static Clientejuridico getRecordById(int id){
+        Clientejuridico cj=null;
         try{
             Connection con=getConnection();
             PreparedStatement ps=con.prepareStatement("select * from cliente where id=?");
             ps.setInt(1, id);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
-                c=new Cliente();
-                c.setId(rs.getInt("id"));
-                c.setNome(rs.getString("nome"));
-                c.setCpfcnpj(rs.getString("cpfcnpj"));
-                c.setDnascimento(rs.getString("dnascimento"));
-                c.setContato(rs.getString("contato"));
-                c.setEmail(rs.getString("email"));
-                c.setCep(rs.getString("cep"));
-                c.setEndereco(rs.getString("endereco"));
-                c.setNumero(rs.getInt("numero"));
-                c.setComplemento(rs.getString("complemento"));
-                c.setEstado(rs.getString("estado"));
-                c.setCidade(rs.getString("cidade"));
+                cj=new Clientejuridico();
+                cj.setId(rs.getInt("id"));
+                cj.setNome(rs.getString("nome"));
+                cj.setCpfcnpj(rs.getString("cpfcnpj"));
+                cj.setDnascimento(rs.getString("dnascimento"));
+                cj.setContato(rs.getString("contato"));
+                cj.setEmail(rs.getString("email"));
+                cj.setCep(rs.getString("cep"));
+                cj.setEndereco(rs.getString("endereco"));
+                cj.setNumero(rs.getInt("numero"));
+                cj.setComplemento(rs.getString("complemento"));
+                cj.setEstado(rs.getString("estado"));
+                cj.setCidade(rs.getString("cidade"));
             }
         }catch(Exception e){System.out.println(e);}
-        return c;
+        return cj;
     }
 }
