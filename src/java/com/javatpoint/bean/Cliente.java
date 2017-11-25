@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
  *
  * @author porte
  */
-public class Cliente {
+public abstract class Cliente {
     private int id, numero;
     private String nome, cpfcnpj, contato, email, endereco, complemento, estado, cidade, dnascimento, cep;
     //private Date dnascimento;
@@ -53,13 +53,7 @@ public class Cliente {
     public void setCpfcnpj(String cpfcnpj){
         this.cpfcnpj = cpfcnpj;
     }
-    /*public Date getDnascimento(){
-        return dnascimento; 
-    }
-    public void setDnascimento(Date dnascimento){
-        this.dnascimento = dnascimento;
-       
-    }*/
+    
     public String getDnascimento(){
         return dnascimento;
     }

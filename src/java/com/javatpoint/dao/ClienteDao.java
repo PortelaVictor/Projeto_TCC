@@ -8,7 +8,7 @@ package com.javatpoint.dao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import com.javatpoint.bean.Cliente;
+//import com.javatpoint.bean.Cliente;
 import com.javatpoint.bean.Clientejuridico;
 public class ClienteDao {
     public static Connection getConnection(){
@@ -50,7 +50,7 @@ public class ClienteDao {
                 ps=con.prepareStatement("insert into clientejuridico(idcliente,cnpj,ie) values (?,?,?)");
                 ps.setInt(1, idCliente);
                 ps.setString(2, cj.getCnpj());//dados[i+0]);
-                ps.setString(3, cj.getIE());//dados[i+1]);
+                ps.setString(3, cj.getInsce());//dados[i+1]);
                 status=ps.executeUpdate();
                 
             //}*/    
@@ -78,6 +78,18 @@ public class ClienteDao {
             ps.setString(11,cj.getCidade());
             ps.setInt(12,cj.getId());
             status=ps.executeUpdate();
+            
+            
+            PreparedStatement ps1=con.prepareStatement(
+            "update clientejuridico set cnpj=?, ie=? where idcliente=?");
+            ps1.setString(1,cj.getCnpj());
+            ps1.setString(2,cj.getInsce());
+            ps1.setInt(3,cj.getId());
+            status=ps1.executeUpdate();
+            
+            
+            
+            
         }catch(Exception e){System.out.println(e);}
         return status;
     }
@@ -86,8 +98,11 @@ public class ClienteDao {
         try{
             Connection con=getConnection();
             PreparedStatement ps=con.prepareStatement("delete from cliente where id=?");
+            PreparedStatement ps1=con.prepareStatement("delete from clientejuridico where idcliente=?");
             ps.setInt(1,cj.getId());
+            ps1.setInt(1,cj.getId());
             status=ps.executeUpdate();
+            status=ps1.executeUpdate();
         }catch(Exception e){System.out.println(e);}
         return status;
     }
@@ -96,6 +111,7 @@ public class ClienteDao {
         try{
             Connection con=getConnection();
             PreparedStatement ps=con.prepareStatement("select * from cliente");
+            PreparedStatement ps1=con.prepareStatement("select * from clientejuridico where id=idcliente");
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
                 Clientejuridico cj =new Clientejuridico();
@@ -112,8 +128,11 @@ public class ClienteDao {
                 cj.setComplemento(rs.getString("complemento"));
                 cj.setEstado(rs.getString("estado"));
                 cj.setCidade(rs.getString("cidade"));
+                cj.setCnpj(rs.getString("cnpj"));
+                cj.setInsce(rs.getString("ie"));
                 list.add(cj);
             }
+            
         }catch(Exception e){System.out.println(e);}
         return list;
      }
@@ -138,6 +157,18 @@ public class ClienteDao {
                 cj.setComplemento(rs.getString("complemento"));
                 cj.setEstado(rs.getString("estado"));
                 cj.setCidade(rs.getString("cidade"));
+                
+            }
+            PreparedStatement ps1=con.prepareStatement("select * from clientejuridico where idcliente=?");
+            ps1.setInt(1, id);
+            ResultSet rs1=ps1.executeQuery();
+            while(rs1.next()){
+                //cj=new Clientejuridico();
+                //cj.setId(rs1.getInt("id"));
+                //cj.setIdcliente(id);
+                cj.setCnpj(rs1.getString("cnpj"));
+                cj.setInsce(rs1.getString("ie"));
+                
             }
         }catch(Exception e){System.out.println(e);}
         return cj;

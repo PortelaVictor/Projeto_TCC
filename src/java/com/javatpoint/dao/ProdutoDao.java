@@ -75,6 +75,7 @@ public class ProdutoDao {
                 p.setDvencimento(rs.getString("dvencimento"));
                 p.setCategoria(rs.getInt("categoria"));
                 p.setUnidade(rs.getString("unidade"));
+                p.setQuantidade(rs.getInt("quantidade"));
                 list.add(p);
             }
         }catch(Exception e){System.out.println(e);}
@@ -95,6 +96,7 @@ public class ProdutoDao {
                 p.setDvencimento(rs.getString("dvencimento"));
                 p.setCategoria(rs.getInt("categoria"));
                 p.setUnidade(rs.getString("unidade"));
+                p.setQuantidade(rs.getInt("quantidade"));
             }
         }catch(Exception e){System.out.println(e);}
         return p;

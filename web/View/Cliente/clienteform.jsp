@@ -160,8 +160,8 @@
                                             <input type="text" class="form-control" id="cnpj" name="cnpj" >
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <label for="ie">IE:</label>
-                                            <input type="text" class="form-control" id="ie" name="ie">
+                                            <label for="insce">IE:</label>
+                                            <input type="text" class="form-control" id="ie" name="insce">
                                         </div>
                                        
                                     </div>

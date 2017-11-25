@@ -29,9 +29,43 @@ public class VendaDao {
     } 
     public static int save(Venda v,String[] items){
         int status=0;
+        //int idVenda = 0;
         String[] teste = items;
         try{
             Connection con=getConnection();
+            //idVenda = Integer.valueOf("Id");
+            // verificação se tem item no estoque 
+            for (int i = 0; i < items.length; i=i+4) {
+                //String sql = "INSERT INTO TBITEMCOMPRA (CODIGOPRODUTO, CODIGOCOMPRA, QUANTIDADE, VALORUNITARIO) VALUES (?, ?, ?, ?)";
+                PreparedStatement slct=con.prepareStatement("select * from produto where id=?");
+                //slct.setInt(1, idVenda);
+                slct.setInt(1, Integer.parseInt(items[i+0])); // Produto
+                
+                ResultSet rs = slct.executeQuery(); 
+                rs.next();
+                int saldo = rs.getInt("quantidade"); 
+                //setEstado(rs.getString("estado"));
+                if(saldo < Integer.parseInt(items[i+1])){
+                    //Exception('Nao há estoque disponivel.');
+                    System.out.println("Nao há estoque disponivel.");
+                    status = 2; // Sem estoque
+                    return status;
+                    /*try {
+                    if (iv.getQuantidade() > produtoDAO.recuperar(iv.getProduto().getCodigo()).getQuantidade()) {
+                        JOptionPane.showMessageDialog(this, "Impossível finalizar.\nProduto " + iv.getProduto() + " em falta no estoque.", "Alerta", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(this, "Erro ao consultar o estoque.", "Erro", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }*/
+                    
+                }
+                
+            }
+            
+            
+            
             PreparedStatement ps=con.prepareStatement(
             "insert into venda(cliente,dvenda,contato,numero,totalvenda) values (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1,v.getCliente());
@@ -58,16 +92,8 @@ public class VendaDao {
                 ps.execute();
                 
               
-                // verificação se tem item no estoque 
-                /*try {
-                    if (iv.getQuantidade() > produtoDAO.recuperar(iv.getProduto().getCodigo()).getQuantidade()) {
-                        JOptionPane.showMessageDialog(this, "Impossível finalizar.\nProduto " + iv.getProduto() + " em falta no estoque.", "Alerta", JOptionPane.WARNING_MESSAGE);
-                        return;
-                    }
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(this, "Erro ao consultar o estoque.", "Erro", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }*/
+               
+               
                 ps=con.prepareStatement("update produto set quantidade=quantidade-? where id=?") ;
                 ps.setString(1, items[i+1]);
                 ps.setString(2, items[i+0]);

@@ -136,7 +136,7 @@
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="cpfcnpj">CPF:</label>
-                                                                        <input type="text" class="form-control" name="cpfcnpj" value="<%=cj.getCpfcnpj()%>" required>
+                                                                        <input type="text" class="form-control" name="cpfcnpj" value="<%=cj.getCpfcnpj()%>" >
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="dnascimento">Data Nascimento:</label>
@@ -151,6 +151,22 @@
                                                                         <input type="email" class="form-control" name="email" value="<%=cj.getEmail()%>" required>
                                                                     </div>
                                                                 </div>
+                                                                    <%  
+                                                                    //Query buscando categoria
+                                                                    ResultSet resultset=null;
+                                                                    try{
+                                                                        Class.forName("com.mysql.jdbc.Driver");
+                                                                        Connection con=null;
+                                                                        con=DriverManager.getConnection("jdbc:mysql://localhost:3306/producao","root","");
+                                                                        Statement statement = con.createStatement();
+                                                                        resultset =statement.executeQuery("select idcliente,cnpj,ie from clientejuridico");
+                                                                %>
+                                                                <%while(resultset.next()){
+                                                                        if(cj.getId()==resultset.getInt(1)){
+                                                                        %>
+                                                                        
+                                                                    
+                                                                    
                                                                     <div class="row">
                                                                     <div class="box">
                                                                         <h4 class="underline">Informações de Pessoa Júridica</h4>
@@ -158,13 +174,17 @@
 
                                                                     <div class="form-group col-md-3">
                                                                         <label for="cnpj">CNPJ:</label>
-                                                                        <input type="text" class="form-control" id="cnpj" name="cnpj" value="<%=cj.getCnpj()%>" >
+                                                                        <input type="text" class="form-control" id="cnpj" name="cnpj" value="<%= resultset.getString(2)%>" >
                                                                     </div>
                                                                     <div class="form-group col-md-3">
-                                                                        <label for="ie">IE:</label>
-                                                                        <input type="text" class="form-control" id="ie" name="ie" value="<%=cj.getIE()%>" >
+                                                                        <label for="insce">IE:</label>
+                                                                        <input type="text" class="form-control" id="insce" name="insce" value="<%= resultset.getString(3)%>" >
                                                                     </div>
-
+                                                                    <%
+                                                                            }
+                                                                    }
+                                                                        }catch(Exception e){out.println("Entrada errada"+e);}
+                                                                    %>
                                                                 </div> 
                                                                 <div class="box">
                                                                     <h4 class="underline">Informações de Endereço</h4>
@@ -229,7 +249,7 @@
                                                                 <div class="form-group col-md-12">
                                                                     <div class="col-md-4">
                                                                       <button id="cancelar" type="button" name="cancela" class="btn btn-default" onclick="voltar()">Cancelar</button>
-                                                                      <button id="incluir" name="incluir" class="btn btn-primary">Salvar</button>
+                                                                      <button id="Editar" name="Editar" class="btn btn-warning" value="Editar">Editar</button>
                                                                     </div>
                                                                 </div>
                                                             </div>    

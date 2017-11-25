@@ -161,8 +161,8 @@
                                                                         <input type="text" class="form-control" id="cnpj" name="cnpj" value="<%=cj.getCnpj()%> "disabled="disabled" >
                                                                     </div>
                                                                     <div class="form-group col-md-3">
-                                                                        <label for="ie">IE:</label>
-                                                                        <input type="text" class="form-control" id="ie" name="ie" value="<%=cj.getIE()%>" disabled="disabled">
+                                                                        <label for="insce">IE:</label>
+                                                                        <input type="text" class="form-control" id="insce" name="insce" value="<%=cj.getInsce()%>" disabled="disabled">
                                                                     </div>
 
                                                                 </div>    

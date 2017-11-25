@@ -139,7 +139,7 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                     <div class="col-md-4">
-                                        <button id="cancelar" type="button" name="cancela" class="btn btn-default">Cancelar</button>
+                                        <button id="cancelar" type="button" name="cancela" class="btn btn-default" onclick="voltar()">Cancelar</button>
                                         <button id="delete" name="delete" class="btn btn-danger">Deletar</button>
                                     </div>
                                 </div>    
@@ -151,7 +151,12 @@
             <!-- /.row -->
         <!-- /#wrapper -->
         </div>
-		
+	<script type="text/javascript">
+        function voltar()
+        {
+                location.href=" index.jsp"
+        }
+        </script>	
 		<!-- jQuery  deixa o menu lateral aberto-->
 		<script src="../../Model/vendor/jquery/jquery.min.js"></script>
 

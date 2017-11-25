@@ -14,9 +14,13 @@
     
  
     int i=VendaDao.save(v,values);     
-    if(i>0){   
+    if(i==1){   
         response.sendRedirect("addvenda-sucesso.jsp");  
-    }else{  
+    }
+    else if(i==2){   
+        response.sendRedirect("addvenda-estoque.jsp");  
+    }
+    else{  
         response.sendRedirect("addvenda-erro.jsp");  
     }  
 %>

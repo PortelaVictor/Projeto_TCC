@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
  * @author porte
  */
 public class Produto extends Categoria {
-    private int id, categoria;
+    private int id, categoria,quantidade;
     private String nome, descricao, dvencimento, unidade;
     //private Date dnascimento;
     
@@ -51,6 +51,12 @@ public class Produto extends Categoria {
     }
     public void setUnidade(String unidade){
         this.unidade = unidade;
+    }
+    public int getQuantidade(){
+        return quantidade;
+    }
+    public void setQuantidade(int quantidade){
+        this.quantidade = quantidade;
     }
 
     

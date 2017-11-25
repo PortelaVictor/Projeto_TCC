@@ -197,7 +197,7 @@
                                                      <%  
                                                         //Query buscando produtos
                                                         //ResultSet resultset=null;
-                                                        
+                                                        ResultSet resultsetProd=null;
                                                         try{
                                                             Class.forName("com.mysql.jdbc.Driver");
                                                             Connection con=null;
@@ -205,13 +205,20 @@
                                                             Statement statement = con.createStatement();
                                                             
                                                             resultset =statement.executeQuery("select * from itemcompra where idcompra='"+c.getId()+"'");
-                                                            resultset =statement.executeQuery("select * from fornecedor");
                                                             int i = 1;
                                                     %>
                                                             <%while(resultset.next()){%>
                                                                 <tr> 
                                                                 <td><%= i%></td>
-                                                                <td><%= resultset.getString(3)%></td>
+                                                                <td><%
+                                                                    
+                                                                        Statement statementProd = con.createStatement();
+                                                                        resultsetProd =statementProd.executeQuery("select * from produto where id='"+resultset.getString(3)+"'"); 
+                                                                        while(resultsetProd.next()){%>
+                                                                            <%= resultsetProd.getString(2)%>
+                                                                        <%}
+                                                                        
+                                                                    %></td>
                                                                 <td><%= resultset.getString(4)%></td>
                                                                 <td><%= resultset.getString(5)%></td>
                                                                 <td><%= resultset.getString(6)%></td>
