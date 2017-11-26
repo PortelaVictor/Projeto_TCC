@@ -50,24 +50,13 @@ public class VendaDao {
                     System.out.println("Nao há estoque disponivel.");
                     status = 2; // Sem estoque
                     return status;
-                    /*try {
-                    if (iv.getQuantidade() > produtoDAO.recuperar(iv.getProduto().getCodigo()).getQuantidade()) {
-                        JOptionPane.showMessageDialog(this, "Impossível finalizar.\nProduto " + iv.getProduto() + " em falta no estoque.", "Alerta", JOptionPane.WARNING_MESSAGE);
-                        return;
-                    }
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(this, "Erro ao consultar o estoque.", "Erro", JOptionPane.ERROR_MESSAGE);
-                        return;
-                    }*/
-                    
                 }
                 
             }
             
-            
-            
+           
             PreparedStatement ps=con.prepareStatement(
-            "insert into venda(cliente,dvenda,contato,numero,totalvenda) values (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            "insert into venda(cliente,dvenda,contato,numero,totalvenda,status) values (?,?,?,?,?,1)", Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1,v.getCliente());
             ps.setString(2,v.getDvenda());
             ps.setString(3,v.getContato());
@@ -82,7 +71,6 @@ public class VendaDao {
 
              
             for (int i = 0; i < items.length; i=i+4) {
-                //String sql = "INSERT INTO TBITEMCOMPRA (CODIGOPRODUTO, CODIGOCOMPRA, QUANTIDADE, VALORUNITARIO) VALUES (?, ?, ?, ?)";
                 ps=con.prepareStatement("insert into itemvenda(idvenda,idproduto,quantidade,valorunitario,valortotal) values (?,?,?,?,?)");
                 ps.setInt(1, idVenda);
                 ps.setString(2, items[i+0]);
@@ -91,9 +79,6 @@ public class VendaDao {
                 ps.setString(5, items[i+3]);
                 ps.execute();
                 
-              
-               
-               
                 ps=con.prepareStatement("update produto set quantidade=quantidade-? where id=?") ;
                 ps.setString(1, items[i+1]);
                 ps.setString(2, items[i+0]);
@@ -103,14 +88,18 @@ public class VendaDao {
         }catch(Exception e){System.out.println(e);}
         return status;
     }
-    public static int update(Venda v){
+    public static int cancelar(Venda v){
         int status=0;
         try{
             Connection con=getConnection();
             PreparedStatement ps=con.prepareStatement(
-            "update venda set cliente=? where id=?");
+            "update venda set cliente=?,dvenda=?,contato=?,numero=?,totalvenda=?,status=0 where id=?");
             ps.setInt(1,v.getCliente());
-            ps.setInt(2,v.getId());
+            ps.setString(2,v.getDvenda());
+            ps.setString(3,v.getContato());
+            ps.setString(4,v.getNumero());
+            ps.setInt(5,v.getTotal());
+            ps.setInt(6,v.getId());
             status=ps.executeUpdate();
         }catch(Exception e){System.out.println(e);}
         return status;
@@ -140,6 +129,7 @@ public class VendaDao {
                 v.setContato(rs.getString("contato"));
                 v.setNumero(rs.getString("numero"));
                 v.setTotal(rs.getInt("total"));
+                v.setStatus(rs.getInt("status"));
                 list.add(v);
             }
         }catch(Exception e){System.out.println(e);}
@@ -160,6 +150,7 @@ public class VendaDao {
                 v.setContato(rs.getString("contato"));
                 v.setNumero(rs.getString("numero"));
                 v.setTotal(rs.getInt("totalvenda"));
+                v.setStatus(rs.getInt("status"));
                 
             }
         }catch(Exception e){System.out.println(e);}

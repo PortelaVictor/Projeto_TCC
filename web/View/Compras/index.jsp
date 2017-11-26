@@ -131,7 +131,7 @@
                                 }
                             %>
                             <%
-                                //Query para apresentar os produtos cadastrados e pesqusiar pelo nome cadastrado
+                                //Query para apresentar as comprass cadastrados e pesqusiar pelo id cadastrado
                                 Connection connect = null;
                                 Statement s = null;
                                 try{
@@ -139,7 +139,7 @@
                                     connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/producao","root","");
                                     s = connect.createStatement();
                                     String sql = "SELECT * FROM compra WHERE id like '%" + pesquisa + "%' " +
-                                        "ORDER BY id ASC ";
+                                        "ORDER BY id ASC";
                                     System.out.println(sql);
                                     ResultSet rec = s.executeQuery(sql);
 
@@ -148,7 +148,7 @@
                             <form name="pesquisa" method="get" action="index.jsp">
                                 <table >
                                     <tr>
-                                        <td><label for="nome_completo"> Pesquisa por nome:</label></td>
+                                        <td><label for="nome_completo"> Pesquisa por id:</label></td>
                                         <td><input type="text" class="form-control" name="pesquisa"></td>
                                          <td colspan="2"> <button type="submit" id="pesquisar" name="pesquisar" class="btn btn-default">Pesquisar</button></td>
                                     </tr>

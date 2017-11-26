@@ -131,7 +131,7 @@
                                 }
                             %>
                             <%
-                                //Query para apresentar os produtos cadastrados e pesqusiar pelo nome cadastrado
+                                //Query para apresentar as vendas cadastradas e pesqusiar pelo id cadastrado
                                 Connection connect = null;
                                 Statement s = null;
                                 try{
@@ -148,7 +148,7 @@
                             <form name="pesquisa" method="get" action="index.jsp">
                                 <table >
                                     <tr>
-                                        <td><label for="nome_completo"> Pesquisa por nome:</label></td>
+                                        <td><label for="nome_completo"> Pesquisa por id:</label></td>
                                         <td><input type="text" class="form-control" name="pesquisa"></td>
                                          <td colspan="2"> <button type="submit" id="pesquisar" name="pesquisar" class="btn btn-default">Pesquisar</button></td>
                                     </tr>
@@ -199,7 +199,7 @@
                                            <td class="actions">
 
                                                 <a class="btn btn-warning btn-xs" href="visualizar.jsp?id=<%=rec.getString("id")%>">Visualizar</a>
-                                                <a class="btn btn-danger btn-xs"  href="deleteform.jsp?id=<%=rec.getString("id")%>" >Cancelar</a>
+                                                <a class="btn btn-danger btn-xs"  href="cancelar.jsp?id=<%=rec.getString("id")%>" >Cancelar</a>
                                             </td>
                                         </tr>
                                                                     <%}%>

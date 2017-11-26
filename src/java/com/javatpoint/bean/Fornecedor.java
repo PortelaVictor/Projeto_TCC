@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
  *
  * @author porte
  */
-public class Fornecedor {
+public abstract class Fornecedor {
     private int id, numero;
     private String nome, cpfcnpj, contato, email, endereco, complemento, estado, cidade, dnascimento, cep;
     //private Date dnascimento;

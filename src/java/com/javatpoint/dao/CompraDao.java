@@ -67,14 +67,18 @@ public class CompraDao {
         }catch(Exception e){System.out.println(e);}
         return status;
     }
-    public static int update(Compra c){
+    public static int cancelar(Compra c){
         int status=0;
         try{
             Connection con=getConnection();
             PreparedStatement ps=con.prepareStatement(
-            "update compra set status=? where id=?");
-            ps.setInt(1,0);
-            ps.setInt(2,c.getId());
+            "update compra set fornecedor=?,dcompra=?,contato=?,numero=?,totalcompra=?,status=0 where id=?");
+            ps.setInt(1,c.getFornecedor());
+            ps.setString(2,c.getDcompra());
+            ps.setString(3,c.getContato());
+            ps.setString(4,c.getNumero());
+            ps.setInt(5,c.getTotal());
+            ps.setInt(6,c.getId());
             status=ps.executeUpdate();
         }catch(Exception e){System.out.println(e);}
         return status;

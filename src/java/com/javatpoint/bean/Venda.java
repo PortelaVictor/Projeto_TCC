@@ -7,17 +7,15 @@ package com.javatpoint.bean;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
  * @author porte
  */
 public class Venda {
-     private int id, cliente,total;
+     private int id, cliente,total,status;
      private String dvenda,numero,contato;
-    private List<ItemVenda> items;
+   
     
     public Venda() {
         this.id = 0;
@@ -25,7 +23,7 @@ public class Venda {
         this.dvenda = "";
         this.contato = "";
         this.numero = "";
-        this.items = new ArrayList<>();
+        this.status = 0;
       
     }
     public int getId(){
@@ -66,15 +64,11 @@ public class Venda {
     public void setTotal(int total){
         this.total = total;
     }
-    public List<ItemVenda> getItens() {
-        return items;
+   
+    public int getStatus(){
+        return status;
     }
-
-    public void addItem(ItemVenda itemVenda) {
-        items.add(itemVenda);
+    public void setStatus(int status){
+        this.status = status;
     }
-
-    public int quantidadeItens() {
-        return items.size();
-    }  
 }

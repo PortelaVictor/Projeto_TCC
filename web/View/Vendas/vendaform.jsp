@@ -129,7 +129,7 @@
                                 <div class="col-md-12"> 
 
                                     <%  
-                                        //Query buscando Fornecedor
+                                        //Query buscando Cliente
                                         ResultSet resultset=null;
                                         try{
                                             Class.forName("com.mysql.jdbc.Driver");

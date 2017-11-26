@@ -212,7 +212,7 @@
                                         </div>
                                         <div id="financeiro" class="panel-collapse collapse in">
                                             <div class="panel-body">
-                                                <a href="Financeiro/index.jsp">Estoque</a><br>
+                                                <a href="Financeiro/index.jsp">Fluxo de Caixa</a><br>
                                                 
                                             </div>
                                         </div>
