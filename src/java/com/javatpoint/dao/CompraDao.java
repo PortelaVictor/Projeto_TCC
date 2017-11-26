@@ -32,7 +32,7 @@ public class CompraDao {
         try{
             Connection con=getConnection();
             PreparedStatement ps=con.prepareStatement(
-            "insert into compra(fornecedor,dcompra,contato,numero,totalcompra) values (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            "insert into compra(fornecedor,dcompra,contato,numero,totalcompra,status) values (?,?,?,?,?,1)", Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1,c.getFornecedor());
             ps.setString(2,c.getDcompra());
             ps.setString(3,c.getContato());
@@ -72,8 +72,8 @@ public class CompraDao {
         try{
             Connection con=getConnection();
             PreparedStatement ps=con.prepareStatement(
-            "update compra set fornecedor=? where id=?");
-            ps.setInt(1,c.getFornecedor());
+            "update compra set status=? where id=?");
+            ps.setInt(1,0);
             ps.setInt(2,c.getId());
             status=ps.executeUpdate();
         }catch(Exception e){System.out.println(e);}
@@ -103,6 +103,7 @@ public class CompraDao {
                 c.setContato(rs.getString("contato"));
                 c.setNumero(rs.getString("numero"));
                 c.setTotal(rs.getInt("total"));
+                c.setStatus(rs.getInt("status"));
                 list.add(c);
             }
         }catch(Exception e){System.out.println(e);}
@@ -123,6 +124,7 @@ public class CompraDao {
                 c.setContato(rs.getString("contato"));
                 c.setNumero(rs.getString("numero"));
                 c.setTotal(rs.getInt("totalcompra"));
+                c.setStatus(rs.getInt("status"));
                 
             }
         }catch(Exception e){System.out.println(e);}

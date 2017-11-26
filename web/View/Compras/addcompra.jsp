@@ -10,7 +10,7 @@
 
 <%
     
-    String[] values = request.getParameterValues("dados");   
+    String[] values = request.getParameterValues("items");   
     
  
     int i=CompraDao.save(c,values);     

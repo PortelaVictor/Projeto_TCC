@@ -16,7 +16,7 @@ import java.util.List;
  * @author porte
  */
 public class Compra {
-    private int id, fornecedor,total;
+    private int id, fornecedor,total,status;
     private String dcompra,numero,contato;
     private List<ItemCompra> items;
     //private Double totalcompra;
@@ -27,6 +27,7 @@ public class Compra {
         this.dcompra = "";
         this.contato = "";
         this.numero = "";
+        this.status = 0;
         this.items = new ArrayList<>();
         //this.totalcompra = 0;
         //totalcompra
@@ -80,6 +81,12 @@ public class Compra {
     }
     public void setTotal(int total){
         this.total = total;
+    }
+    public int getStatus(){
+        return status;
+    }
+    public void setStatus(int status){
+        this.status = status;
     }
     
 

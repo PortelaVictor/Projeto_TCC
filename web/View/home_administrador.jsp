@@ -114,6 +114,16 @@
                                     </ul>
                                     <!-- /.nav-second-level -->
                             </li>
+                            <li>
+                                    <a href="#"><i class="fa fa-edit fa-fw"></i> Fluxo de Caixa<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+                                            <li>
+                                                    <a href="Financeiro/index.jsp">Fluxo de Caixa</a>
+                                            </li>
+
+                                    </ul>
+                                    <!-- /.nav-second-level -->
+                            </li>
                         </ul>
                     </div>
                     <!-- /.sidebar-collapse -->
@@ -186,6 +196,23 @@
                                         <div id="estoque" class="panel-collapse collapse in">
                                             <div class="panel-body">
                                                 <a href="Estoque/index.jsp">Estoque</a><br>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>        
+                            <div class="col-lg-6">
+                                <div class="panel-group" id="accordion">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                    <a data-toggle="collapse" data-parent="#accordion" href="#financeiro">Fluxo de Caixa</a>
+                                            </h4>
+                                        </div>
+                                        <div id="financeiro" class="panel-collapse collapse in">
+                                            <div class="panel-body">
+                                                <a href="Financeiro/index.jsp">Estoque</a><br>
                                                 
                                             </div>
                                         </div>

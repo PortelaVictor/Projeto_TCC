@@ -5,9 +5,9 @@
 --%>
 
 <%@page import="com.javatpoint.dao.FornecedorDao"%>
-<jsp:useBean id="f" class="com.javatpoint.bean.Fornecedor"></jsp:useBean>
-<jsp:setProperty property="*" name="f"/>
+<jsp:useBean id="fj" class="com.javatpoint.bean.Fornecedorjuridico"></jsp:useBean>
+<jsp:setProperty property="*" name="fj"/>
 <%
-    FornecedorDao.delete(f);
+    FornecedorDao.delete(fj);
     response.sendRedirect("index.jsp");
 %>

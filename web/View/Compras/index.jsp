@@ -199,7 +199,7 @@
                                            <td class="actions">
 
                                                 <a class="btn btn-warning btn-xs" href="visualizar.jsp?id=<%=rec.getString("id")%>">Visualizar</a>
-                                                <a class="btn btn-danger btn-xs"  href="deleteform.jsp?id=<%=rec.getString("id")%>" >Cancelar</a>
+                                                <a class="btn btn-danger btn-xs"  href="cancelar.jsp?id=<%=rec.getString("id")%>" >Cancelar</a>
                                             </td>
                                         </tr>
                                         <%}%>

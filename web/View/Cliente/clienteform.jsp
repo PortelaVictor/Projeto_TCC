@@ -186,7 +186,7 @@
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="complemento">Complemento:</label>
-                                            <input type="text" class="form-control" name="complemento" required>
+                                            <input type="text" class="form-control" name="complemento">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="estado">Estado:</label>

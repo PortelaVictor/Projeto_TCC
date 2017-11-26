@@ -22,7 +22,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Compra</title>
+        <title>Venda</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!-- Bootstrap Core CSS Importante menu lateral-->
         <link href="../../Model/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -125,7 +125,7 @@
                                 String id=request.getParameter("id");
                                 Venda v=VendaDao.getRecordById(Integer.parseInt(id));
                             %>    
-                            <form action="editcategoria.jsp" method="post">
+                            <form action="" method="post">
                                 <div class="col-md-12">
                                     <div class="form-group col-md-6">
                                         <label for="email">ID:</label>
@@ -190,10 +190,14 @@
                                         </thead>
                                         <tbody>	
                                             
+
+                                            
+                                            
+
                                                      <%  
                                                         //Query buscando produtos
                                                         //ResultSet resultset=null;
-                                                        
+                                                        ResultSet resultsetProd=null;
                                                         try{
                                                             Class.forName("com.mysql.jdbc.Driver");
                                                             Connection con=null;
@@ -201,30 +205,30 @@
                                                             Statement statement = con.createStatement();
                                                             
                                                             resultset =statement.executeQuery("select * from itemvenda where idvenda='"+v.getId()+"'");
-                                                            
                                                             int i = 1;
                                                     %>
                                                             <%while(resultset.next()){%>
                                                                 <tr> 
-                                                                <td><%= i%></td>
-                                                                <td><%= resultset.getString(3)%></td>
-                                                                <td><%= resultset.getString(4)%></td>
-                                                                <td><%= resultset.getString(5)%></td>
-                                                                <td><%= resultset.getString(6)%></td>
+                                                                <td><input type="number" class="form-control" name="total" id="email" value="<%= i%>" disabled="disabled"></td>
+                                                                <td><%
+                                                                    
+                                                                        Statement statementProd = con.createStatement();
+                                                                        resultsetProd =statementProd.executeQuery("select * from produto where id='"+resultset.getString(3)+"'"); 
+                                                                        while(resultsetProd.next()){%>
+                                                                            
+                                                                            <input type="text" class="form-control" name="total" id="email" value="<%= resultsetProd.getString(2)%>" disabled="disabled">
+                                                                        <%}
+                                                                        
+                                                                    %></td>
+                                                                <td><input type="number" class="form-control" name="total" id="email" value="<%= resultset.getString(4)%>" disabled="disabled"></td>
+                                                                <td><input type="number" class="form-control" name="total" id="email" value="<%= resultset.getString(5)%>" disabled="disabled"></td>
+                                                                <td><input type="number" class="form-control" name="total" id="email" value="<%= resultset.getString(6)%>" disabled="disabled"></td>
                                                                 </tr> 
                                                             <% i++; }  %>
                                                     <%
                                                         }catch(Exception e){out.println("Entrada errada"+e);}
-                                                    %>                                           
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                        </tbody>
+                                                    %>                                             
+                                         </tbody>
                                         <br>
                                         <tfoot>
 

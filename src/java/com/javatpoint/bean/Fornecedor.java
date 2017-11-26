@@ -13,6 +13,27 @@ public class Fornecedor {
     private String nome, cpfcnpj, contato, email, endereco, complemento, estado, cidade, dnascimento, cep;
     //private Date dnascimento;
     
+    public Fornecedor() {
+        
+    }
+    
+    public Fornecedor(int id, int numero, String nome, String cpfcnpj, String contato, String email, String endereco, String complemento, String estado, String cidade, String dnascimento, String cep){
+        
+        this.id = id;
+        this.numero = numero;
+        this.nome = nome;
+        this.cpfcnpj = cpfcnpj;
+        this.contato = contato;
+        this.email = email;
+        this.endereco = endereco;
+        this.complemento = complemento;
+        this.estado = estado;
+        this.cidade = cidade;
+        this.dnascimento = dnascimento;
+        this.cep = cep;
+    }
+
+    
     public int getId(){
         return id;
     }
@@ -31,13 +52,7 @@ public class Fornecedor {
     public void setCpfcnpj(String cpfcnpj){
         this.cpfcnpj = cpfcnpj;
     }
-    /*public Date getDnascimento(){
-        return dnascimento; 
-    }
-    public void setDnascimento(Date dnascimento){
-        this.dnascimento = dnascimento;
-       
-    }*/
+    
     public String getDnascimento(){
         return dnascimento;
     }

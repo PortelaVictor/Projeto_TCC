@@ -198,7 +198,7 @@
                                             
                                             <c:forEach items="${items}" var="items">                                          
                                             <tr>
-                                                <td><input type="number" value="1" class="form-control"  id="codigo" name="codigo" disabled="disabled"></td>
+                                                <td><input type="text" value="1" class="form-control"  id="codigo" name="codigo" disabled="disabled"></td>
                                                 <td>
                                                     <%  
                                                         //Query buscando produtos
@@ -210,7 +210,7 @@
                                                             Statement statement = con.createStatement();
                                                             resultset =statement.executeQuery("select * from produto");
                                                     %>
-                                                    <select class="form-control" id="sel1" name="items" required>
+                                                    <select class="form-control" id="sel1" name="items">
                                                         <option></option>
                                                         <%while(resultset.next()){%>
                                                         <option value=<%= resultset.getString(1)%>><%= resultset.getString(2)%></option>
@@ -255,8 +255,7 @@
 	</body>	
     <!-- /#wrapper -->
     <script type="text/javascript">
-        
-        function calc(id) {
+            function calc(id) {
             var tot=document.getElementById('totalcompra');
             var row=id.parentNode.parentNode;
             var quant=row.cells[2].getElementsByTagName('input')[0].value;
@@ -325,10 +324,9 @@
                 };
             }
         </script>
-        
         <script type="text/javascript">
             RemoveTableRow = function(handler) {
-                //alert(handler);
+                alert(handler);
                 var tr = $(handler).closest('tr');
 
                 tr.fadeOut(400, function(){ 
@@ -338,7 +336,6 @@
                 return false;
             };
         </script>
-        
     <script type="text/javascript">
         function voltar()
         {

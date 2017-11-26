@@ -5,11 +5,11 @@
 --%>
 
 <%@page import="com.javatpoint.dao.FornecedorDao"%>  
-<jsp:useBean id="f" class="com.javatpoint.bean.Fornecedor"></jsp:useBean>  
-<jsp:setProperty property="*" name="f"/>  
+<jsp:useBean id="fj" class="com.javatpoint.bean.Fornecedorjuridico"></jsp:useBean>  
+<jsp:setProperty property="*" name="fj"/>  
 
 <%  
-    int i=FornecedorDao.save(f);  
+    int i=FornecedorDao.save(fj);  
     if(i>0){  
         response.sendRedirect("addfornecedor-sucesso.jsp");  
     }else{  

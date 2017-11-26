@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 13-Out-2017 às 00:50
+-- Generation Time: 26-Nov-2017 às 01:56
 -- Versão do servidor: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -37,8 +37,9 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`id`, `nome`, `descricao`) VALUES
-(4, 'Suplemento', 'Suplemento'),
-(6, 'Bebidas', 'Bebidas');
+(11, 'Medicamentos', 'Medicamentos'),
+(10, 'Alimentos', 'Alimentos'),
+(9, 'Bebidas', 'Bebidas');
 
 -- --------------------------------------------------------
 
@@ -49,7 +50,7 @@ INSERT INTO `categoria` (`id`, `nome`, `descricao`) VALUES
 CREATE TABLE `cliente` (
   `id` int(11) NOT NULL,
   `nome` varchar(60) NOT NULL,
-  `cpfcnpj` varchar(30) NOT NULL,
+  `cpfcnpj` varchar(30) DEFAULT NULL,
   `dnascimento` date NOT NULL,
   `contato` varchar(20) NOT NULL,
   `email` varchar(60) NOT NULL,
@@ -66,7 +67,50 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id`, `nome`, `cpfcnpj`, `dnascimento`, `contato`, `email`, `cep`, `endereco`, `numero`, `complemento`, `estado`, `cidade`) VALUES
-(1, 'Victor Portela', '101.691.834-83', '2017-05-24', '8134544996', 'portelavictor@hotmail.com', '50680090', 'rua jose felipe santiago', 135, 'apt 202', 'Pernambuco', 'Recife');
+(34, 'Victor Portela Chagas', '101.291.334-84', '2017-11-25', '81996732612', 'portelavictor@hotmail.com', '50680-090', 'Rua Jose Felipe Santiago', 12, 'apt 202', 'Pernambuco', 'Recife');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `clientejuridico`
+--
+
+CREATE TABLE `clientejuridico` (
+  `id` int(11) NOT NULL,
+  `idcliente` int(11) NOT NULL,
+  `cnpj` varchar(30) DEFAULT NULL,
+  `ie` varchar(30) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `clientejuridico`
+--
+
+INSERT INTO `clientejuridico` (`id`, `idcliente`, `cnpj`, `ie`) VALUES
+(17, 34, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `compra`
+--
+
+CREATE TABLE `compra` (
+  `id` int(11) NOT NULL,
+  `fornecedor` int(11) NOT NULL,
+  `dcompra` date NOT NULL,
+  `contato` varchar(60) NOT NULL,
+  `numero` varchar(14) NOT NULL,
+  `totalcompra` int(11) NOT NULL,
+  `status` int(1) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `compra`
+--
+
+INSERT INTO `compra` (`id`, `fornecedor`, `dcompra`, `contato`, `numero`, `totalcompra`, `status`) VALUES
+(62, 5, '2017-11-25', 'Alex', '81996732613', 30, 1);
 
 -- --------------------------------------------------------
 
@@ -94,7 +138,64 @@ CREATE TABLE `fornecedor` (
 --
 
 INSERT INTO `fornecedor` (`id`, `nome`, `cpfcnpj`, `dnascimento`, `contato`, `email`, `cep`, `endereco`, `numero`, `complemento`, `estado`, `cidade`) VALUES
-(1, 'Victor Portela Chagas', '101.691.834-84', '1992-02-17', '81996732613', 'portelavictor@hotmail.com', '50680-090', 'Rua Jose Felipe Santiago', 12, 'apt 202', 'Pernambuco', 'Recife');
+(5, 'Alex Lima', '101.691.834-84', '1988-04-08', '81996732613', 'aaa@hotmail.com', '50610-120', 'Rua DemÃ³crito de Souza Filho', 105, 'Ao lado da MV2', 'Pernambuco', 'Recife');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `fornecedorjuridico`
+--
+
+CREATE TABLE `fornecedorjuridico` (
+  `id` int(11) NOT NULL,
+  `idfornecedor` int(11) NOT NULL,
+  `cnpj` varchar(30) NOT NULL,
+  `ie` varchar(30) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `itemcompra`
+--
+
+CREATE TABLE `itemcompra` (
+  `id` int(11) NOT NULL,
+  `idcompra` int(11) NOT NULL,
+  `idproduto` int(11) NOT NULL,
+  `quantidade` int(11) NOT NULL,
+  `valorunitario` int(11) NOT NULL,
+  `valortotal` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `itemcompra`
+--
+
+INSERT INTO `itemcompra` (`id`, `idcompra`, `idproduto`, `quantidade`, `valorunitario`, `valortotal`) VALUES
+(56, 62, 9, 10, 3, 30);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `itemvenda`
+--
+
+CREATE TABLE `itemvenda` (
+  `id` int(11) NOT NULL,
+  `idvenda` int(11) NOT NULL,
+  `idproduto` int(11) NOT NULL,
+  `quantidade` int(11) NOT NULL,
+  `valorunitario` int(11) NOT NULL,
+  `valortotal` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `itemvenda`
+--
+
+INSERT INTO `itemvenda` (`id`, `idvenda`, `idproduto`, `quantidade`, `valorunitario`, `valortotal`) VALUES
+(14, 14, 9, 2, 7, 14);
 
 -- --------------------------------------------------------
 
@@ -108,15 +209,16 @@ CREATE TABLE `produto` (
   `descricao` varchar(100) NOT NULL,
   `dvencimento` date NOT NULL,
   `categoria` int(60) NOT NULL,
-  `unidade` varchar(100) NOT NULL
+  `unidade` varchar(100) NOT NULL,
+  `quantidade` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `produto`
 --
 
-INSERT INTO `produto` (`id`, `nome`, `descricao`, `dvencimento`, `categoria`, `unidade`) VALUES
-(1, 'Coca-Cola', 'Coca-Cola', '2017-10-04', 2, '');
+INSERT INTO `produto` (`id`, `nome`, `descricao`, `dvencimento`, `categoria`, `unidade`, `quantidade`) VALUES
+(9, 'Coca-Cola', 'Refrigerante ', '2020-06-24', 9, 'Lt', 8);
 
 -- --------------------------------------------------------
 
@@ -138,8 +240,29 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nome`, `email`, `login`, `senha`, `perfil`) VALUES
-(2, 'Victor Portela Chagas', 'portelavictor@hotmail.com', 'vportela', '5416d7cd6ef195a0f7622a9c56b55e84', 'Administrador'),
-(10, 'teste', 'teste@hotmail.com', 'teste', '698dc19d489c4e4db73e28a713eab07b', 'Administrador');
+(2, 'Victor Portela Chagas', 'portelavictor@hotmail.com', 'vportela', '5416d7cd6ef195a0f7622a9c56b55e84', 'Administrador');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `venda`
+--
+
+CREATE TABLE `venda` (
+  `id` int(11) NOT NULL,
+  `cliente` int(11) NOT NULL,
+  `dvenda` date NOT NULL,
+  `contato` varchar(60) NOT NULL,
+  `numero` varchar(14) NOT NULL,
+  `totalvenda` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `venda`
+--
+
+INSERT INTO `venda` (`id`, `cliente`, `dvenda`, `contato`, `numero`, `totalvenda`) VALUES
+(14, 34, '2017-11-25', 'Alex', '81996732613', 14);
 
 --
 -- Indexes for dumped tables
@@ -158,9 +281,33 @@ ALTER TABLE `cliente`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `clientejuridico`
+--
+ALTER TABLE `clientejuridico`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `compra`
+--
+ALTER TABLE `compra`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `fornecedor`
 --
 ALTER TABLE `fornecedor`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `itemcompra`
+--
+ALTER TABLE `itemcompra`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `itemvenda`
+--
+ALTER TABLE `itemvenda`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -176,6 +323,12 @@ ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `venda`
+--
+ALTER TABLE `venda`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -183,27 +336,52 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+--
+-- AUTO_INCREMENT for table `clientejuridico`
+--
+ALTER TABLE `clientejuridico`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+--
+-- AUTO_INCREMENT for table `compra`
+--
+ALTER TABLE `compra`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 --
 -- AUTO_INCREMENT for table `fornecedor`
 --
 ALTER TABLE `fornecedor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `itemcompra`
+--
+ALTER TABLE `itemcompra`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+--
+-- AUTO_INCREMENT for table `itemvenda`
+--
+ALTER TABLE `itemvenda`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT for table `venda`
+--
+ALTER TABLE `venda`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

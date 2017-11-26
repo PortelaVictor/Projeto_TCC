@@ -125,7 +125,7 @@
                                 String id=request.getParameter("id");
                                 Compra c=CompraDao.getRecordById(Integer.parseInt(id));
                             %>    
-                            <form action="editcategoria.jsp" method="post">
+                            <form action="editcompra.jsp" method="post">
                                 <div class="col-md-12">
                                     <div class="form-group col-md-6">
                                         <label for="email">ID:</label>
@@ -239,8 +239,8 @@
                                 <div class="form-group col-md-12">
                                     <br>
                                     <div class="col-md-4">
-                                        <button id="cancelar" type="button" name="cancela" class="btn btn-default" onclick="voltar()">Cancelar</button>
-                                        <!--<button id="Editar" name="Editar" class="btn btn-warning" value="Editar">Editar</button>-->
+                                        <button id="cancelar" type="button" name="cancela" class="btn btn-default" onclick="voltar()">Voltar</button>
+                                        <button id="Editar" name="Editar" class="btn btn-warning" value="Editar">Cancelar</button>
                                     </div>
                                 </div>    
                             </form>

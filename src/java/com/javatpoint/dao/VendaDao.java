@@ -154,7 +154,7 @@ public class VendaDao {
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
                 v=new Venda();
-                v.setCliente(rs.getInt("cliente"));
+                v.setId(rs.getInt("id"));
                 v.setCliente(rs.getInt("cliente"));
                 v.setDvenda(rs.getString("dvenda"));
                 v.setContato(rs.getString("contato"));

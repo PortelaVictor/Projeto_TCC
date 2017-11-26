@@ -114,20 +114,24 @@
                     <!-- /.navbar-static-side -->
             </nav>
         </div>
-       
+        
         <div id="page-wrapper">
-            
-                <table>           
-                           <tr>
-                           <td>data</td>
-                           <td>compra</td>
-                           <td>venda</td>
-                           <td>totaldia</td>
-                           </tr>
-                           
-                                       
-            
-            <%  
+            <div class="col-md-12">
+                                    <table id="products-table" border="1" width="900px" >	
+                                        <thead bgcolor="#DDEEFF">
+                                                <th><label for="dnascimento" align="center">Data</label></th>
+                                                <th><label for="produto" align="center">Compra</label></th>	
+                                                <th><label for="quantidade" align="center">Venda</label></th>
+                                                <th><label for="totalproduto" align="center">Total Dia</label></th>
+		
+                                        </thead>
+                                        <tbody>	
+                                            
+
+                                            
+                                            
+
+                                                     <%  
                 //Query buscando categoria
                 ResultSet resultset=null;
                 try{
@@ -139,19 +143,25 @@
                     while(resultset.next()){
                            %>
                            <tr>
-                                <td><%= resultset.getString(1)%></td>
-                                <td><%= resultset.getString(2)%></td>
-                                <td><%= resultset.getString(3)%></td>
-                                <td><%= resultset.getString(4)%></td>
+                                <td><input type="date" class="form-control" name="numero" id="email" value="<%= resultset.getString(1)%>" disabled="disabled"></td>
+                                <td><input type="number" class="form-control" name="total" id="email" value="<%= resultset.getString(2)%>" disabled="disabled"></td>
+                                <td><input type="number" class="form-control" name="total" id="email" value="<%= resultset.getString(3)%>" disabled="disabled"></td>
+                                <td><input type="number" class="form-control" name="total" id="email" value="<%= resultset.getString(4)%>" disabled="disabled"></td>
                            </tr>
                            
                            <% 
                     }
                
                     }catch(Exception e){out.println("Entrada errada"+e);}
-                %>
+                %>                                          
+                                         </tbody>
+                                        <br>
+                                        <tfoot>
+
+                                        </tfoot>	
+                                    </table>
+                                </div>
                 
-            </table>
         </div>
 		<!-- /#wrapper -->
 		<!-- jQuery  deixa o menu lateral aberto-->

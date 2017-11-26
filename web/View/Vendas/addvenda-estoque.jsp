@@ -11,9 +11,8 @@
         <title>Erro</title>
     </head>
     <body>
-        <div class="alert alert-success">
-        .
-            <div class="alert alert-warning" role="alert">Nao há estoque disponivel...</div>
+       
+        <div class="alert alert-warning" role="alert">Nao há estoque disponivel...</div>
         </div>
       
         <jsp:include page="vendaform.jsp"></jsp:include>

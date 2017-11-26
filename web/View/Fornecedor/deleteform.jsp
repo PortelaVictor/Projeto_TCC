@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
-<%@page import="com.javatpoint.dao.FornecedorDao,com.javatpoint.bean.Fornecedor"%>
+<%@page import="com.javatpoint.dao.FornecedorDao,com.javatpoint.bean.Fornecedorjuridico"%>
 <%
     if ((session.getAttribute("id") == null) || (session.getAttribute("id") == "" )) {
 %>
@@ -71,7 +71,7 @@
 					<div class="sidebar-nav navbar-collapse">
 						<ul class="nav" id="side-menu">
 							<li>
-								<a href="home.jsp"><i class="fa fa-dashboard fa-fw"></i> Início</a>
+								<a href="..\home_administrador.jsp"><i class="fa fa-dashboard fa-fw"></i> Início</a>
 							</li>
 							<li>
 								<a href="#"><i class="fa fa-files-o fa-fw"></i> Cadastros Básicos<span class="fa arrow"></span></a>
@@ -124,32 +124,47 @@
 						<div class="table-responsive col-md-12">
 							<%
 								String id=request.getParameter("id");
-								Fornecedor f=FornecedorDao.getRecordById(Integer.parseInt(id));
+								Fornecedorjuridico fj=FornecedorDao.getRecordById(Integer.parseInt(id));
 							%>    
 							<form action="deletefornecedor.jsp" method="post">
 								<div class="col-md-12">
-                                                                <input type="hidden" name="id" value="<%=f.getId()%>"/>
+                                                                <input type="hidden" name="id" value="<%=fj.getId()%>"/>
                                                                 <div class="row">
                                                                     <div class="form-group col-md-6">
                                                                         <label for="nome"> Nome:</label>
-                                                                        <input type="text" class="form-control" name="nome" value="<%=f.getNome()%>" disabled="disabled">
+                                                                        <input type="text" class="form-control" name="nome" value="<%=fj.getNome()%>" disabled="disabled">
                                                                     </div>
                                                                     <div class="form-group col-md-3">
-                                                                        <label for="cpfcnpj">CPF/CNPJ:</label>
-                                                                        <input type="text" class="form-control" name="cpfcnpj" value="<%=f.getCpfcnpj()%>" disabled="disabled">
+                                                                        <label for="cpfcnpj">CPF:</label>
+                                                                        <input type="text" class="form-control" name="cpfcnpj" value="<%=fj.getCpfcnpj()%>" disabled="disabled">
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="dnascimento">Data Nascimento:</label>
-                                                                        <input type="date" class="form-control" name="dnascimento" value="<%=f.getDnascimento()%>" disabled="disabled">
+                                                                        <input type="date" class="form-control" name="dnascimento" value="<%=fj.getDnascimento()%>" disabled="disabled">
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="contato">Contato:</label>
-                                                                        <input type="text" class="form-control" name="contato" value="<%=f.getContato()%>" disabled="disabled">
+                                                                        <input type="text" class="form-control" name="contato" value="<%=fj.getContato()%>" disabled="disabled">
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="email">Informe e-mail:</label>
-                                                                        <input type="email" class="form-control" name="email" value="<%=f.getEmail()%>" disabled="disabled">
+                                                                        <input type="email" class="form-control" name="email" value="<%=fj.getEmail()%>" disabled="disabled">
                                                                     </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="box">
+                                                                        <h4 class="underline">Informações de Pessoa Júridica</h4>
+                                                                    </div>
+
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="cnpj">CNPJ:</label>
+                                                                        <input type="text" class="form-control" id="cnpj" name="cnpj" value="<%=fj.getCnpj()%> "disabled="disabled" >
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="insce">IE:</label>
+                                                                        <input type="text" class="form-control" id="insce" name="insce" value="<%=fj.getInsce()%>" disabled="disabled">
+                                                                    </div>
+
                                                                 </div>    
                                                                 <div class="box">
                                                                     <h4 class="underline">Informações de Endereço</h4>
@@ -157,24 +172,24 @@
                                                                 <div class="row">
                                                                     <div class="form-group col-md-3">
                                                                         <label for="cep">CEP:</label>
-                                                                        <input type="text" class="form-control" name="cep" value="<%=f.getCep()%>" disabled="disabled">
+                                                                        <input type="text" class="form-control" name="cep" value="<%=fj.getCep()%>" disabled="disabled">
                                                                     </div>
                                                                     <div class="form-group col-md-6">
                                                                         <label for="endereco">Endereço:</label>
-                                                                        <input type="text" class="form-control" name="endereco" value="<%=f.getEndereco()%>" disabled="disabled">
+                                                                        <input type="text" class="form-control" name="endereco" value="<%=fj.getEndereco()%>" disabled="disabled">
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="numero">Numero:</label>
-                                                                        <input type="number" class="form-control" name="numero" value="<%=f.getNumero()%>" disabled="disabled">
+                                                                        <input type="number" class="form-control" name="numero" value="<%=fj.getNumero()%>" disabled="disabled">
                                                                     </div>
                                                                     <div class="form-group col-md-6">
                                                                         <label for="complemento">Complemento:</label>
-                                                                        <input type="text" class="form-control" name="complemento" value="<%=f.getComplemento()%>" disabled="disabled">
+                                                                        <input type="text" class="form-control" name="complemento" value="<%=fj.getComplemento()%>" disabled="disabled">
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="estado">Estado:</label>
                                                                         <select class="form-control" id="sel1" name="estado" disabled="disabled">
-                                                                            <option><%= f.getEstado()%></option> 
+                                                                            <option><%= fj.getEstado()%></option> 
                                                                             <option>Acre</option> 
                                                                             <option>Alagoas</option> 
                                                                             <option>Amazonas</option> 
@@ -206,10 +221,10 @@
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label for="cidade">Cidade:</label>
-                                                                        <input type="text" class="form-control" name="cidade" value="<%=f.getCidade()%>" disabled="disabled">
+                                                                        <input type="text" class="form-control" name="cidade" value="<%=fj.getCidade()%>" disabled="disabled">
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            </div>  
                                                             <div class="form-group col-md-12">
                                                                 <div class="col-md-4">
                                                                     <button id="cancelar" type="button" name="cancela" class="btn btn-default" onclick="voltar()">Cancelar</button>
